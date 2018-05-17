@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace MeteoMobileApp
+namespace MeteoMobile
 {
 	public partial class MainPage : ContentPage
 	{

@@ -1,12 +1,12 @@
-﻿using MeteoMobileApp.Services;
+﻿using MeteoMobile.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
-using MeteoMobileApp.Helpers;
+using MeteoMobile.Helpers;
 
-namespace MeteoMobileApp.ViewModels
+namespace MeteoMobile.ViewModels
 {
     class LoginViewModel
     {

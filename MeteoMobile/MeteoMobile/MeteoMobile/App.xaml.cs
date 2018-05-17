@@ -1,10 +1,10 @@
-using MeteoMobileApp.Views;
+using MeteoMobile.Views;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation (XamlCompilationOptions.Compile)]
-namespace MeteoMobileApp
+namespace MeteoMobile
 {
 	public partial class App : Application
 	{
