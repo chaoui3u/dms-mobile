@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ViewModels="clr-namespace:MeteoMobile.ViewModels"
+             x:Class="MeteoMobile.Views.SignUpPage">
+    <ContentPage.BindingContext>
+        <ViewModels:SignUpViewModel/>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry Text="{Binding FirstName}" Placeholder="first name"/>
+            <Entry Text="{Binding LastName}" Placeholder="last name"/>
+            <Entry Text="{Binding Password}" Placeholder="password" IsPassword="True"/>
+            <Entry Text="{Binding ConfirmPassword}" Placeholder="password confirmation" IsPassword="True"/>
+            <Entry Text="{Binding Email}" Placeholder="email"/>
+            <Picker Title="Selectionner un role" SelectedItem="{Binding Role}">
+                <Picker.Items>
+                    <x:String>Admin</x:String>
+                    <x:String>Staff</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <Label Text="{Binding Message}" TextColor="Black" HorizontalOptions="Center"/>
+
+            <Button Command="{Binding SignUpCommand}" Text="Sign Up" />
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

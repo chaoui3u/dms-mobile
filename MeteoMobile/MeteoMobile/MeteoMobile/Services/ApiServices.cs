@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Net.Security;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using MeteoMobile.Helpers;
+using MeteoMobile.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace MeteoMobile.Services
 {
-    class ApiServices
+    public class ApiServices
     {
         public async Task<string> LoginAsync(string userName, string password)
         {
@@ -28,7 +27,8 @@ namespace MeteoMobile.Services
 
             request.Content = new FormUrlEncodedContent(keyValues);
 
-            ServicePointManager.ServerCertificateValidationCallback = MyRemoteCertificateValidationCallback;
+            //validating certificate to use https
+            ServicePointManager.ServerCertificateValidationCallback = CertificateValidation.MyRemoteCertificateValidationCallback;
 
             using (var client = new HttpClient())
             {
@@ -41,8 +41,9 @@ namespace MeteoMobile.Services
                 var accessTokenExpiration = jwtDynamic.Value<DateTime>(".expires");
                 var accessToken = jwtDynamic.Value<string>("access_token");
 
+                //saving access token in preferences
                 Settings.AccessTokenExpirationDate = accessTokenExpiration;
-
+               
                 System.Diagnostics.Debug.WriteLine(accessTokenExpiration);
 
                 System.Diagnostics.Debug.WriteLine(content);
@@ -52,33 +53,36 @@ namespace MeteoMobile.Services
 
         }
 
-        public bool MyRemoteCertificateValidationCallback(System.Object sender,
-    X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        public async Task<bool> SignUpAsync(string accessToken,string firstName, string lastName,
+            string password, string email, string role)
         {
-            bool isOk = true;
-            // If there are errors in the certificate chain,
-            // look at each error to determine the cause.
-            if (sslPolicyErrors != SslPolicyErrors.None)
+            var client = new HttpClient();
+
+            //using the token given
+            client.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer",accessToken);
+
+            var model = new SignUpModel
             {
-                for (int i = 0; i < chain.ChainStatus.Length; i++)
-                {
-                    if (chain.ChainStatus[i].Status == X509ChainStatusFlags.RevocationStatusUnknown)
-                    {
-                        continue;
-                    }
-                    chain.ChainPolicy.RevocationFlag = X509RevocationFlag.EntireChain;
-                    chain.ChainPolicy.RevocationMode = X509RevocationMode.Online;
-                    chain.ChainPolicy.UrlRetrievalTimeout = new TimeSpan(0, 1, 0);
-                    chain.ChainPolicy.VerificationFlags = X509VerificationFlags.AllFlags;
-                    bool chainIsValid = chain.Build((X509Certificate2)certificate);
-                    if (!chainIsValid)
-                    {
-                        isOk = false;
-                        break;
-                    }
-                }
-            }
-            return isOk;
+                FirstName = firstName,
+                LastName = lastName,
+                Password = password,       
+                Email = email,
+                Role = role
+            };
+
+            var json = JsonConvert.SerializeObject(model);
+
+            HttpContent content = new StringContent(json);
+
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            
+            //validating certificate to use https
+            ServicePointManager.ServerCertificateValidationCallback = CertificateValidation.MyRemoteCertificateValidationCallback;
+
+            var response = await client.PostAsync(Constants.SignUpUrl, content);
+
+            return response.IsSuccessStatusCode;
         }
     }
 }
