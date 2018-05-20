@@ -37,8 +37,8 @@ namespace MeteoMobile.Services
                 var content = await response.Content.ReadAsStringAsync();
 
                 JObject jwtDynamic = JsonConvert.DeserializeObject<dynamic>(content);
-
-                var accessTokenExpiration = jwtDynamic.Value<DateTime>(".expires");
+                
+                var accessTokenExpiration = DateTime.Now.AddSeconds(jwtDynamic.Value<int>("expires_in"));
                 var accessToken = jwtDynamic.Value<string>("access_token");
 
                 //saving access token in preferences

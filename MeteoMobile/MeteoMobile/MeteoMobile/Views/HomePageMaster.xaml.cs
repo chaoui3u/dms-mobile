@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MeteoMobile.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -23,6 +24,8 @@ namespace MeteoMobile.Views
 
             BindingContext = new HomePageMasterViewModel();
             ListView = MenuItemsListView;
+            if (DateTime.UtcNow >= Settings.AccessTokenExpirationDate)
+                Application.Current.MainPage = new LoginPage();
         }
 
         class HomePageMasterViewModel : INotifyPropertyChanged
@@ -38,7 +41,7 @@ namespace MeteoMobile.Views
                     new HomePageMenuItem { Id = 2, Title = "Utilisateurs" , TargetType=typeof(UsersPageDetail)},
                     new HomePageMenuItem { Id = 3, Title = "Enregitrer Utilisateur" , TargetType=typeof(SignUpPageDetail)},
                     new HomePageMenuItem { Id = 4, Title = "Statistics" , TargetType=typeof(StatisticsTabbedPageDetail)},
-                    new HomePageMenuItem { Id = 5, Title = "Se déconnecter" , TargetType=typeof(HomePageDetail)},
+                    new HomePageMenuItem { Id = 5, Title = "Se déconnecter" , TargetType=typeof(LogoutPage)},
                 });
             }
             

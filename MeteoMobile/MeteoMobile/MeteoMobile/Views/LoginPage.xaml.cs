@@ -23,7 +23,9 @@ namespace MeteoMobile.Views
             //TODO: create a waiting page until token come
             await PutTaskDelay();
             if (!string.IsNullOrEmpty(Settings.AccessToken))
-                 await Navigation.PushModalAsync(new HomePage());
+                await Navigation.PushModalAsync(new HomePage());
+            else
+                await DisplayAlert("Echec", "Veuillez Recommencer", "Ok");
         }
         async Task PutTaskDelay()
         {

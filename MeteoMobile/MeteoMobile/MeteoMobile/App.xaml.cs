@@ -14,15 +14,14 @@ namespace MeteoMobile
 			InitializeComponent();
 
             MainPage = new LoginPage();
-            //SetMainPage();
-		}
+           // SetMainPage();
+        }
 
         private void SetMainPage()
         {
-            //if (string.IsNullOrEmpty(Settings.AccessToken))
-            //{
-               
-            //}
+            //if (DateTime.UtcNow >= Settings.AccessTokenExpirationDate)
+            //    MainPage = new LoginPage();
+
         }
 
         protected override void OnStart ()
