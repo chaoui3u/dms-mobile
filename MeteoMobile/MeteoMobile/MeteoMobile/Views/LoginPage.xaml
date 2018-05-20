@@ -8,11 +8,13 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout Orientation="Vertical">
+            <Label Text="Utilisateur"/>
             <Entry Text="{Binding Username}"/>
+            <Label Text="Mot de Passe"/>
             <Entry Text="{Binding Password}"
                    IsPassword="True"/>
             <Button Command="{Binding LoginCommand}"
-                    Text="Login" Clicked="Button_Clicked"/>
+                    Text="Valider" Clicked="Button_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

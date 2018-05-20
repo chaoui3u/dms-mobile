@@ -1,3 +1,4 @@
+using MeteoMobile.Helpers;
 using MeteoMobile.Views;
 using System;
 using Xamarin.Forms;
@@ -12,10 +13,19 @@ namespace MeteoMobile
 		{
 			InitializeComponent();
 
-			MainPage = new LoginPage();
+            MainPage = new LoginPage();
+            //SetMainPage();
 		}
 
-		protected override void OnStart ()
+        private void SetMainPage()
+        {
+            //if (string.IsNullOrEmpty(Settings.AccessToken))
+            //{
+               
+            //}
+        }
+
+        protected override void OnStart ()
 		{
 			// Handle when your app starts
 		}

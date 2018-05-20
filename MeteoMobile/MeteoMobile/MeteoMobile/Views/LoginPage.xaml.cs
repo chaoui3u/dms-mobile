@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MeteoMobile.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,14 @@ namespace MeteoMobile.Views
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new SignUpPage());
+            //TODO: create a waiting page until token come
+            await PutTaskDelay();
+            if (!string.IsNullOrEmpty(Settings.AccessToken))
+                 await Navigation.PushModalAsync(new HomePage());
+        }
+        async Task PutTaskDelay()
+        {
+            await Task.Delay(5000);
         }
     }
 }

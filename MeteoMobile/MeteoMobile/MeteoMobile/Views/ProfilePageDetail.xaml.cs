@@ -10,13 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace MeteoMobile.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class SignUpPage : ContentPage
+	public partial class ProfilePageDetail : ContentPage
 	{
-		public SignUpPage ()
+		public ProfilePageDetail ()
 		{
 			InitializeComponent ();
 		}
-
-     
-    }
+	}
 }
