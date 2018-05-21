@@ -1,22 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:MeteoMobile.ViewModels"
              x:Class="MeteoMobile.Views.UsersPageDetail">
-  <ListView x:Name="MyListView"
-            ItemsSource="{Binding Items}"
+
+    <ContentPage.BindingContext>
+        <viewModels:UsersViewModel/>
+    </ContentPage.BindingContext>
+
+    <ListView x:Name="MyListView"
+            ItemsSource="{Binding Users}"
+            HasUnevenRows="True"
             ItemTapped="Handle_ItemTapped"
             CachingStrategy="RecycleElement">
-            
-    <!--Built in Cells-->
-    <ListView.ItemTemplate>
-        <DataTemplate>
-            <TextCell Text="{Binding .}" />
-        </DataTemplate>
-    </ListView.ItemTemplate>
-    
-    <!--Custom View Cells-->
-    <!--
-    <ListView.ItemTemplate>
+
+        <!--Built in Cells-->
+        
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout>
+                        <Label Text="{Binding Email}" TextColor="Black"/>
+                        <Label Text="{Binding FirstName}" TextColor="Black"/>
+                        <Label Text="{Binding LastName}" TextColor="Black"/>
+                        <Label Text="{Binding CreatedAt}" TextColor="Black"/>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+
+        <!--Custom View Cells-->
+        
+    <!--<ListView.ItemTemplate>
       <DataTemplate>
         <ViewCell>
           <StackLayout>
@@ -27,7 +42,7 @@
           </StackLayout>
         </ViewCell>
       </DataTemplate>
-    </ListView.ItemTemplate>
-    -->
-  </ListView>
+    </ListView.ItemTemplate>-->
+    
+    </ListView>
 </ContentPage>

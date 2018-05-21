@@ -84,5 +84,27 @@ namespace MeteoMobile.Services
 
             return response.IsSuccessStatusCode;
         }
+
+        public async Task<List<UserModel>> GetUsersAsync(string accessToken)
+        {
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", accessToken);
+            //validating certificate to use https
+            ServicePointManager.ServerCertificateValidationCallback = CertificateValidation.MyRemoteCertificateValidationCallback;
+
+            var json = await client.GetStringAsync(Constants.getUsersUrl);
+
+            JObject jsonResponse = JObject.Parse(json);
+            JArray objResponse = (JArray)jsonResponse["value"];
+            //IList<UserModel> user = objResponse.ToObject<IList<UserModel>>();
+
+            var users = JsonConvert.DeserializeObject<List<UserModel>>(objResponse.ToString());
+
+            //var users = JsonConvert.DeserializeObject<List<UserModel>>(json);
+
+            return users;
+
+        }
     }
 }
