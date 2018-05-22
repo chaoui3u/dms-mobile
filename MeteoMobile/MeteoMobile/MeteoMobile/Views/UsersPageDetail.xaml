@@ -8,22 +8,24 @@
         <viewModels:UsersViewModel/>
     </ContentPage.BindingContext>
 
+    
     <ListView x:Name="MyListView"
             ItemsSource="{Binding Users}"
             HasUnevenRows="True"
             ItemTapped="Handle_ItemTapped"
             CachingStrategy="RecycleElement">
-
+        
+        
         <!--Built in Cells-->
         
         <ListView.ItemTemplate>
             <DataTemplate>
+                
                 <ViewCell>
                     <StackLayout>
                         <Label Text="{Binding Email}" TextColor="Black"/>
                         <Label Text="{Binding FirstName}" TextColor="Black"/>
                         <Label Text="{Binding LastName}" TextColor="Black"/>
-                        <Label Text="{Binding CreatedAt}" TextColor="Black"/>
                     </StackLayout>
                 </ViewCell>
             </DataTemplate>

@@ -1,9 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MeteoMobile.Views.StatisticsTabbedPageDetail">
+            xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+            x:Class="MeteoMobile.Views.StatisticsTabbedPageDetail">
   <!--Pages can be added as references or inline-->
-  <ContentPage Title="Tab 1" />
-  <ContentPage Title="Tab 2" />
-  <ContentPage Title="Tab 3" />
+
+    
+    <ContentPage Title="Chart 1">
+        <ContentPage.Content>
+            <ScrollView>
+                <StackLayout>
+                    <forms:ChartView x:Name="Chart1"  HeightRequest="400" />
+                </StackLayout>
+            </ScrollView>
+            
+        </ContentPage.Content>
+    </ContentPage>
+    
+    <ContentPage Title="Chart 2" >
+        <ContentPage.Content>
+            <ScrollView>
+                <StackLayout>
+                    <forms:ChartView  x:Name="Chart2" HeightRequest="400"/>
+                </StackLayout>
+            </ScrollView>
+        </ContentPage.Content>
+            
+    </ContentPage>
+    
+    <ContentPage Title="Chart 3" >
+        <ContentPage.Content>
+            <ScrollView>
+                <StackLayout>
+                    <forms:ChartView  x:Name="Chart3"  HeightRequest="400"/>
+                </StackLayout>
+            </ScrollView>
+        </ContentPage.Content>
+    </ContentPage>
 </TabbedPage>
