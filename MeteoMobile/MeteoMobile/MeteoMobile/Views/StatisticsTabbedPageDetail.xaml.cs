@@ -1,4 +1,5 @@
-﻿using Microcharts;
+﻿using MeteoMobile.ViewModels;
+using Microcharts;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,8 @@ namespace MeteoMobile.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class StatisticsTabbedPageDetail : TabbedPage
     {
+       // WeatherRecordViewModel vm = new WeatherRecordViewModel();
+
         List<Entry> entriesPage1 = new List<Entry>
     {
         new Entry(200)
@@ -90,6 +93,8 @@ namespace MeteoMobile.Views
             Chart1.Chart = new PointChart { Entries = entriesPage1, };
             Chart2.Chart = new BarChart { Entries = entriesPage2 };
             Chart3.Chart = new LineChart { Entries = entriesPage3 };
+
+            //vm.GetWeatherRecordsCommand.Execute(null);
         }
     }
 }

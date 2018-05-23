@@ -106,5 +106,23 @@ namespace MeteoMobile.Services
             return users;
 
         }
+
+        public async Task<List<WeatherRecordModel>> GetWeatherRecordsAsync(string accessToken)
+        {
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", accessToken);
+            //validating certificate to use https
+            ServicePointManager.ServerCertificateValidationCallback = CertificateValidation.MyRemoteCertificateValidationCallback;
+
+            var json = await client.GetStringAsync(Constants.getWeatherRecordsUrl);
+
+            JObject jsonResponse = JObject.Parse(json);
+            JArray objResponse = (JArray)jsonResponse["value"];
+
+            var weatherRecords = JsonConvert.DeserializeObject<List<WeatherRecordModel>>(objResponse.ToString());
+
+            return weatherRecords;
+        }
     }
 }
