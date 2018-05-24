@@ -11,7 +11,7 @@ using Xamarin.Forms;
 
 namespace MeteoMobile.ViewModels
 {
-    class WeatherRecordViewModel : INotifyPropertyChanged
+    public class WeatherRecordViewModel : INotifyPropertyChanged
     {
         ApiServices _apiServices = new ApiServices();
         private List<WeatherRecordModel> _weatherRecords;
