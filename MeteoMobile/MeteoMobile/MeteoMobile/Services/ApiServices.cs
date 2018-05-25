@@ -107,16 +107,17 @@ namespace MeteoMobile.Services
 
         }
 
-        public async Task<List<WeatherRecordModel>> GetWeatherRecordsAsync(string accessToken)
+        public async Task<List<WeatherRecordModel>> GetWeatherRecordsAsync(string accessToken,DateTimeOffset dateTime)
         {
             var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Bearer", accessToken);
             //validating certificate to use https
             ServicePointManager.ServerCertificateValidationCallback = CertificateValidation.MyRemoteCertificateValidationCallback;
-
-            var json = await client.GetStringAsync(Constants.getWeatherRecordsUrl);
-
+            var url = Constants.getWeatherRecordsUrl + dateTime.Year+"-"+dateTime.Month+"-"+dateTime.Day+"T00:00:00" 
+                + "/" + dateTime.Year + "-" + dateTime.Month + "-" + dateTime.Day + "T23:59:59";
+            var json = await client.GetStringAsync(url);
+            
             JObject jsonResponse = JObject.Parse(json);
             JArray objResponse = (JArray)jsonResponse["value"];
 

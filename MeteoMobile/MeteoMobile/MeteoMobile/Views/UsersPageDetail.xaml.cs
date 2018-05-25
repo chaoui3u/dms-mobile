@@ -35,12 +35,14 @@ namespace MeteoMobile.Views
 
         protected override async void OnAppearing()
         {
-            await PutTaskDelay();
+            await PutTaskDelay(3000);
+            if(vm.Users == null)
+            await PutTaskDelay(1000);
             MyListView.ItemsSource = vm.Users;
         }
-        async Task PutTaskDelay()
+        async Task PutTaskDelay(int delay)
         {
-            await Task.Delay(3000);
+            await Task.Delay(delay);
         }
 
         async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)

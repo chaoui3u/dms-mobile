@@ -1,4 +1,5 @@
-﻿using MeteoMobile.Models;
+﻿using MeteoMobile.Helpers;
+using MeteoMobile.Models;
 using MeteoMobile.ViewModels;
 using Microcharts;
 using SkiaSharp;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Entry = Microcharts.Entry;
+
 
 namespace MeteoMobile.Views
 {
@@ -19,61 +20,64 @@ namespace MeteoMobile.Views
     public partial class StatisticsTabbedPageDetail : TabbedPage
     {
         WeatherRecordViewModel vm = new WeatherRecordViewModel();
-
+        //DateTimeOffset dateCaptured;
         public StatisticsTabbedPageDetail ()
         {
             InitializeComponent();
            
      
         }
-        protected override async void OnAppearing()
+        protected override  void OnAppearing()
         {
-            vm.GetWeatherRecordsCommand.Execute(null);
-            await PutTaskDelay();
-            if (vm.WeatherRecords == null)
-            await PutTaskDelay();
-            var weatherRecords = vm.WeatherRecords;
-            var entriesDemo = new List<Entry>();
-
-            for (var i = 0; i <= 10; i++)
+           
+            picker.MaximumDate = DateTimeOffset.UtcNow.Date;
+            Device.BeginInvokeOnMainThread(() => 
             {
-                entriesDemo.Add(new Entry(weatherRecords[i].Clouds.All)
-                {
-                    Color = SKColor.Parse("#00BFFF"),
-                    Label = i.ToString(), //weatherRecords[i].CurrentTime.Hour.ToString() + "H"+ weatherRecords[i].CurrentTime.Minute.ToString(),
-                    ValueLabel = weatherRecords[i].Clouds.All + " %"
-                });
-            }
-            var entriesDemo2 = new List<Entry>();
-            for (var i = 0; i <= 5; i++)
-            {
-                entriesDemo2.Add(new Entry(weatherRecords[i].MainData.Humidity)
-                {
-                    Color = SKColor.Parse("#00CED1"),
-                    Label = i.ToString(), //weatherRecords[i].CurrentTime.Hour.ToString() + "H"+ weatherRecords[i].CurrentTime.Minute.ToString(),
-                    ValueLabel = weatherRecords[i].MainData.Humidity + " %"
-                });
-            }
-            var entriesDemo3 = new List<Entry>();
-            for (var i = 0; i <= 10; i++)
-            {
-                entriesDemo3.Add(new Entry(weatherRecords[i].Wind.Speed)
-                {
-                    Color = SKColor.Parse("#FF1493"),
-                    Label = i.ToString(), //weatherRecords[i].CurrentTime.Hour.ToString() + "H"+ weatherRecords[i].CurrentTime.Minute.ToString(),
-                    ValueLabel = weatherRecords[i].Wind.Speed + " m/s"
-                });
-            }
-
-
-            Chart1.Chart = new PointChart { Entries = entriesDemo };
-            Chart2.Chart = new BarChart { Entries = entriesDemo2 };
-            Chart3.Chart = new LineChart { Entries = entriesDemo3 };
+                picker.Focus();
+            });
+ 
         }
 
-            async Task PutTaskDelay()
+        async Task PutTaskDelay(int delay)
         {
-            await Task.Delay(2400);
+            await Task.Delay(delay);
+        }
+
+        private async void DatePicker_DateSelected(object sender, DateChangedEventArgs e)
+        {
+            //dateCaptured = e.NewDate;
+            vm.DateTimeChosen = e.NewDate;
+            vm.GetWeatherRecordsCommand.Execute(null);
+            await PutTaskDelay(2400);
+            if (vm.WeatherRecords == null)
+                await PutTaskDelay(1000);
+            if (vm.WeatherRecords == null || vm.WeatherRecords.Count() == 0)
+            {
+                await DisplayAlert("404 Rien de trouvé", "Rien n'a était touvé a cette date.", "ok");
+            }
+            else
+            {
+                var weatherRecords = vm.WeatherRecords;
+
+                var charts = new ChartsSettings(weatherRecords);
+
+
+                tempratureChart.Chart = new PointChart { Entries = charts.Temprature(weatherRecords.Count()) };
+                cloudsChart.Chart = new BarChart { Entries = charts.Clouds(weatherRecords.Count()) };
+                rainChart.Chart = new LineChart { Entries = charts.Rain(weatherRecords.Count()) };
+                windChart.Chart = new LineChart { Entries = charts.WindSpeed(weatherRecords.Count()) };
+                humidityChart.Chart = new BarChart { Entries = charts.Humidity(weatherRecords.Count()) };
+                pressureChart.Chart = new PointChart { Entries = charts.Pressure(weatherRecords.Count()) };
+            }
+        }
+
+        private void toolPicker_Activated(object sender, EventArgs e)
+        {
+            picker.MaximumDate = DateTimeOffset.UtcNow.Date;
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                picker.Focus();
+            });
         }
     }
 }

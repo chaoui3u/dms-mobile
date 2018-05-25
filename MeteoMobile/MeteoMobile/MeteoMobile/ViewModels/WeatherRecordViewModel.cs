@@ -15,6 +15,13 @@ namespace MeteoMobile.ViewModels
     {
         ApiServices _apiServices = new ApiServices();
         private List<WeatherRecordModel> _weatherRecords;
+        private DateTimeOffset _dateTime;
+        
+        public DateTimeOffset DateTimeChosen
+        {
+            get { return _dateTime;  }
+            set { _dateTime = value; OnPropertyChanged(); }
+        }
 
         public List<WeatherRecordModel> WeatherRecords
         {
@@ -28,7 +35,7 @@ namespace MeteoMobile.ViewModels
             {
                 return new Command(async () =>
                 {
-                    WeatherRecords = await _apiServices.GetWeatherRecordsAsync(Settings.AccessToken);
+                    WeatherRecords = await _apiServices.GetWeatherRecordsAsync(Settings.AccessToken,DateTimeChosen);
                 });
             }
         }

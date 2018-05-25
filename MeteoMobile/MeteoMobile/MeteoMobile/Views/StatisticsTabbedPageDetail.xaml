@@ -5,34 +5,67 @@
             x:Class="MeteoMobile.Views.StatisticsTabbedPageDetail">
   <!--Pages can be added as references or inline-->
 
-    
-    <ContentPage Title="Chart 1">
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem  x:Name="toolPicker" Activated="toolPicker_Activated" Text="Choisir une date" Order="Primary" Priority="0" />
+    </TabbedPage.ToolbarItems>
+    <ContentPage Title="Température">
         <ContentPage.Content>
             <ScrollView>
                 <StackLayout>
-                    <forms:ChartView x:Name="Chart1"  HeightRequest="400" />
+                    <DatePicker x:Name="picker" MinimumDate="05/23/2018" DateSelected="DatePicker_DateSelected" IsVisible="False"/>
+                    <forms:ChartView x:Name="tempratureChart"  HeightRequest="400" />
                 </StackLayout>
             </ScrollView>
             
         </ContentPage.Content>
     </ContentPage>
     
-    <ContentPage Title="Chart 2" >
+    <ContentPage Title="Nuage" >
         <ContentPage.Content>
             <ScrollView>
                 <StackLayout>
-                    <forms:ChartView  x:Name="Chart2" HeightRequest="400"/>
+                    <forms:ChartView  x:Name="cloudsChart" HeightRequest="400"/>
                 </StackLayout>
             </ScrollView>
         </ContentPage.Content>
             
     </ContentPage>
     
-    <ContentPage Title="Chart 3" >
+    <ContentPage Title="Pluit" >
         <ContentPage.Content>
             <ScrollView>
                 <StackLayout>
-                    <forms:ChartView  x:Name="Chart3"  HeightRequest="400"/>
+                    <forms:ChartView  x:Name="rainChart"  HeightRequest="400"/>
+                </StackLayout>
+            </ScrollView>
+        </ContentPage.Content>
+    </ContentPage>
+
+    <ContentPage Title="Vent" >
+        <ContentPage.Content>
+            <ScrollView>
+                <StackLayout>
+                    <forms:ChartView  x:Name="windChart"  HeightRequest="400"/>
+                </StackLayout>
+            </ScrollView>
+        </ContentPage.Content>
+    </ContentPage>
+
+    <ContentPage Title="Humidité" >
+        <ContentPage.Content>
+            <ScrollView>
+                <StackLayout>
+                    <forms:ChartView  x:Name="humidityChart"  HeightRequest="400"/>
+                </StackLayout>
+            </ScrollView>
+        </ContentPage.Content>
+    </ContentPage>
+
+    <ContentPage Title="Préssion" >
+        <ContentPage.Content>
+            <ScrollView>
+                <StackLayout>
+                    <forms:ChartView  x:Name="pressureChart"  HeightRequest="400"/>
                 </StackLayout>
             </ScrollView>
         </ContentPage.Content>

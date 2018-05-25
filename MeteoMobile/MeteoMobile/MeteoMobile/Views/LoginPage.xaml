@@ -9,9 +9,9 @@
     <ContentPage.Content>
         <StackLayout Orientation="Vertical">
             <Label Text="Utilisateur"/>
-            <Entry Text="{Binding Username}"/>
+            <Entry x:Name="login" Text="{Binding Username}"/>
             <Label Text="Mot de Passe"/>
-            <Entry Text="{Binding Password}"
+            <Entry x:Name="pass"  Text="{Binding Password}"
                    IsPassword="True"/>
             <Button Command="{Binding LoginCommand}"
                     Text="Valider" Clicked="Button_Clicked"/>
