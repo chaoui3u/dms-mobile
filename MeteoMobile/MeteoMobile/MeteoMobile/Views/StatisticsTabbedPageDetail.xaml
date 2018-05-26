@@ -3,11 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
             x:Class="MeteoMobile.Views.StatisticsTabbedPageDetail">
-  <!--Pages can be added as references or inline-->
+    <!--Pages can be added as references or inline-->
 
     <TabbedPage.ToolbarItems>
         <ToolbarItem  x:Name="toolPicker" Activated="toolPicker_Activated" Text="Choisir une date" Order="Primary" Priority="0" />
     </TabbedPage.ToolbarItems>
+    
     <ContentPage Title="Température">
         <ContentPage.Content>
             <ScrollView>
@@ -16,28 +17,7 @@
                     <forms:ChartView x:Name="tempratureChart"  HeightRequest="400" />
                 </StackLayout>
             </ScrollView>
-            
-        </ContentPage.Content>
-    </ContentPage>
-    
-    <ContentPage Title="Nuage" >
-        <ContentPage.Content>
-            <ScrollView>
-                <StackLayout>
-                    <forms:ChartView  x:Name="cloudsChart" HeightRequest="400"/>
-                </StackLayout>
-            </ScrollView>
-        </ContentPage.Content>
-            
-    </ContentPage>
-    
-    <ContentPage Title="Pluit" >
-        <ContentPage.Content>
-            <ScrollView>
-                <StackLayout>
-                    <forms:ChartView  x:Name="rainChart"  HeightRequest="400"/>
-                </StackLayout>
-            </ScrollView>
+
         </ContentPage.Content>
     </ContentPage>
 
@@ -46,6 +26,15 @@
             <ScrollView>
                 <StackLayout>
                     <forms:ChartView  x:Name="windChart"  HeightRequest="400"/>
+                </StackLayout>
+            </ScrollView>
+        </ContentPage.Content>
+    </ContentPage>
+    <ContentPage Title="Direction du vent" >
+        <ContentPage.Content>
+            <ScrollView>
+                <StackLayout>
+                    <forms:ChartView  x:Name="windDirectionChart"  HeightRequest="400"/>
                 </StackLayout>
             </ScrollView>
         </ContentPage.Content>

@@ -63,8 +63,7 @@ namespace MeteoMobile.Views
 
 
                 tempratureChart.Chart = new PointChart { Entries = charts.Temprature(weatherRecords.Count()) };
-                cloudsChart.Chart = new BarChart { Entries = charts.Clouds(weatherRecords.Count()) };
-                rainChart.Chart = new LineChart { Entries = charts.Rain(weatherRecords.Count()) };
+                windDirectionChart.Chart = new LineChart { Entries = charts.WindDirection(weatherRecords.Count()) };
                 windChart.Chart = new LineChart { Entries = charts.WindSpeed(weatherRecords.Count()) };
                 humidityChart.Chart = new BarChart { Entries = charts.Humidity(weatherRecords.Count()) };
                 pressureChart.Chart = new PointChart { Entries = charts.Pressure(weatherRecords.Count()) };

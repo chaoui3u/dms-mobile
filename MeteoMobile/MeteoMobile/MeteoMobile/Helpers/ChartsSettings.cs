@@ -16,21 +16,7 @@ namespace MeteoMobile.Helpers
             _weatherRecords = weatherRecords;
         }
 
-        public List<Entry> Clouds(int columnNumber)
-        {
-            var entries = new List<Entry>();
-
-            for (var i = 0; i < columnNumber; i++)
-            {
-                entries.Add(new Entry(_weatherRecords[i].Clouds.All)
-                {
-                    Color = SKColor.Parse("#00BFFF"),
-                    Label = _weatherRecords[i].CurrentTime.Hour.ToString() + "H",
-                    ValueLabel = _weatherRecords[i].Clouds.All + " %"
-                });
-            }
-            return entries;
-        }
+   
 
         public List<Entry> Pressure(int columnNumber)
         {
@@ -80,17 +66,17 @@ namespace MeteoMobile.Helpers
             return entries;
         }
 
-        public List<Entry> Rain(int columnNumber)
+        public List<Entry> WindDirection(int columnNumber)
         {
             var entries = new List<Entry>();
 
             for (var i = 0; i < columnNumber; i++)
             {
-                entries.Add(new Entry(_weatherRecords[i].Rain.Volume)
+                entries.Add(new Entry(_weatherRecords[i].Wind.Degree)
                 {
                     Color = SKColor.Parse("#A52A2A"),
                     Label = _weatherRecords[i].CurrentTime.Hour.ToString() + "H",
-                    ValueLabel = _weatherRecords[i].Rain.Volume + " mm"
+                    ValueLabel = _weatherRecords[i].Wind.Degree + " °"
                 });
             }
             return entries;
