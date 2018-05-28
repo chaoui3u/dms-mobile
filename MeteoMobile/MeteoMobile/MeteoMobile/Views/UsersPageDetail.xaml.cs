@@ -32,16 +32,17 @@ namespace MeteoMobile.Views
             //             "Item 5"
             //         };
  
-            vm.GetUsersCommand.Execute(null);
+            //vm.GetUsersCommand.Execute(null);
+            //vm.IsBusy = true;
      
         }
 
-        protected override async void OnAppearing()
+        protected override  void OnAppearing()
         {
-            await PutTaskDelay(3000);
-            if(vm.Users == null)
-            await PutTaskDelay(1000);
-            MyListView.ItemsSource = vm.Users;
+            //await PutTaskDelay(3000);
+            //if(vm.Users == null)
+            //await PutTaskDelay(1000);
+            //MyListView.ItemsSource = vm.Users;
         }
         async Task PutTaskDelay(int delay)
         {
@@ -63,17 +64,15 @@ namespace MeteoMobile.Views
 
         private async void Modify_Clicked(object sender, EventArgs e)
         {
-            var vm = new ModifyUserViewModel();
-            var userSelected = ((MenuItem)sender).CommandParameter as UserModel;
-            Constants.ThiUser = userSelected;
-            //await PutTaskDelay(2000);
+            Constants.ThisUser = ((MenuItem)sender).CommandParameter as UserModel;
 
             await Navigation.PushModalAsync(new NavigationPage(new ModifyUserPage()));
         }
        
         private void Delete_Clicked(object sender, EventArgs e)
         {
-
+            Constants.ThisUser = ((MenuItem)sender).CommandParameter as UserModel;
+            vm.DeleteUserCommand.Execute(null);
         }
 
         private async void SignUpPicker_Activated(object sender, EventArgs e)

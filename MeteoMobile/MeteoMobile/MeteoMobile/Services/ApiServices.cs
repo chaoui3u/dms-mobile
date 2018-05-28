@@ -142,8 +142,22 @@ namespace MeteoMobile.Services
             return users;
 
         }
+        public async Task<bool> DeleteUserAsync(string accessToken,Guid userId)
+        {
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", accessToken);
+            //validating certificate to use https
+            ServicePointManager.ServerCertificateValidationCallback = CertificateValidation.MyRemoteCertificateValidationCallback;
 
-        public async Task<UserModel> GetMyUserAsync(string accessToken)
+            var response = await client.DeleteAsync(Constants.GetUsersUrl + userId);
+
+            System.Diagnostics.Debug.WriteLine(response.StatusCode + " / " + response.ReasonPhrase + " / " + response.RequestMessage);
+
+            return response.IsSuccessStatusCode;
+        }
+
+            public async Task<UserModel> GetMyUserAsync(string accessToken)
         {
             var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization =

@@ -1,11 +1,13 @@
 ﻿using MeteoMobile.Helpers;
 using MeteoMobile.Models;
 using MeteoMobile.Services;
+using MeteoMobile.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -60,14 +62,16 @@ namespace MeteoMobile.ViewModels
                 {
 
                 var isSuccess = await _apiServices.ModifyUserAsync(Settings.AccessToken, 
-                        Constants.ThiUser.Id,FirstName,
+                        Constants.ThisUser.Id,FirstName,
                         LastName, Password, Email, Role);
-                    
-
                 });
 
             }
 
+        }
+        async Task PutTaskDelay(int delay)
+        {
+            await Task.Delay(delay);
         }
     }
 }

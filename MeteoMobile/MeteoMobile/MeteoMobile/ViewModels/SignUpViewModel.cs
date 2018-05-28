@@ -1,11 +1,13 @@
 ﻿using MeteoMobile.Helpers;
 using MeteoMobile.Models;
 using MeteoMobile.Services;
+using MeteoMobile.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -59,12 +61,15 @@ namespace MeteoMobile.ViewModels
                 return new Command(async() => 
                 {
                     
-                        var isSuccess = await _apiServices.SignUpAsync(Settings.AccessToken,FirstName,
+                   var isSuccess = await _apiServices.SignUpAsync(Settings.AccessToken,FirstName,
                             LastName, Password, Email, Role);
-                        
                 });
           
             }
+        }
+        async Task PutTaskDelay(int delay)
+        {
+            await Task.Delay(delay);
         }
 
     }

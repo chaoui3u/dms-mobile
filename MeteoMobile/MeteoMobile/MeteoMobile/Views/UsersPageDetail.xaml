@@ -16,7 +16,10 @@
             ItemsSource="{Binding Users}"
             HasUnevenRows="True"
             ItemTapped="Handle_ItemTapped"
-            CachingStrategy="RecycleElement">
+            CachingStrategy="RecycleElement"
+              IsPullToRefreshEnabled="True"
+              RefreshCommand="{Binding GetUsersCommand}"
+              IsRefreshing="{Binding IsBusy}">
         
         
         <!--Built in Cells-->
@@ -26,7 +29,7 @@
                 <ViewCell>
                     <ViewCell.ContextActions>
                         <MenuItem Text="Modifier" Clicked="Modify_Clicked" CommandParameter="{Binding .}"/>
-                        <MenuItem Text="Supprimer" Clicked="Delete_Clicked"/>
+                        <MenuItem Text="Supprimer" Clicked="Delete_Clicked" CommandParameter="{Binding .}" IsDestructive="True"/>
                     </ViewCell.ContextActions>
                     <StackLayout>
 
@@ -35,7 +38,7 @@
                         <Label Text="{Binding LastName}" TextColor="Black"/>
                         <Label Text="{Binding Role}" TextColor="Black"/>
                         <Label Text="{Binding CreatedBy}" TextColor="Black"/>
-                        <Label Text="{Binding CreatedAt}" TextColor="Black"/>
+                        <Label Text="{Binding CreatedAt.DateTime}" TextColor="Black"/>
                     </StackLayout>
                 </ViewCell>
             </DataTemplate>
