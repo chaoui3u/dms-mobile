@@ -72,7 +72,6 @@ namespace MeteoMobile.Views
         private void Delete_Clicked(object sender, EventArgs e)
         {
             Constants.ThisUser = ((MenuItem)sender).CommandParameter as UserModel;
-            vm.DeleteUserCommand.Execute(null);
         }
 
         private async void SignUpPicker_Activated(object sender, EventArgs e)
