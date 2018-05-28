@@ -82,6 +82,41 @@ namespace MeteoMobile.Services
 
             var response = await client.PostAsync(Constants.SignUpUrl, content);
 
+            System.Diagnostics.Debug.WriteLine(response.StatusCode+"/"+response.ReasonPhrase);
+            return response.IsSuccessStatusCode;
+        }
+
+        public async Task<bool> ModifyUserAsync(string accessToken,Guid userId, string firstName, string lastName,
+            string password, string email, string role)
+        {
+            var client = new HttpClient();
+
+            //using the token given
+            client.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", accessToken);
+
+            var model = new SignUpModel
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                Password = password,
+                Email = email,
+                Role = role
+            };
+
+            var json = JsonConvert.SerializeObject(model);
+
+            HttpContent content = new StringContent(json);
+
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            //validating certificate to use https
+            ServicePointManager.ServerCertificateValidationCallback = CertificateValidation.MyRemoteCertificateValidationCallback;
+
+            var response = await client.PutAsync(Constants.getUsersUrl+userId, content);
+
+            System.Diagnostics.Debug.WriteLine(response.StatusCode + "/" + response.ReasonPhrase);
+
             return response.IsSuccessStatusCode;
         }
 
@@ -105,6 +140,21 @@ namespace MeteoMobile.Services
 
             return users;
 
+        }
+
+        public async Task<UserModel> GetMyUserAsync(string accessToken)
+        {
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", accessToken);
+            //validating certificate to use https
+            ServicePointManager.ServerCertificateValidationCallback = CertificateValidation.MyRemoteCertificateValidationCallback;
+
+            var json = await client.GetStringAsync(Constants.getMyUserUrl);
+            JObject jsonResponse = JObject.Parse(json);
+
+            var user = JsonConvert.DeserializeObject<UserModel>(jsonResponse.ToString());
+            return user;
         }
 
         public async Task<List<WeatherRecordModel>> GetWeatherRecordsAsync(string accessToken,DateTimeOffset dateTime)

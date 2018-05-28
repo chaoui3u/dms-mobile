@@ -70,7 +70,7 @@ namespace MeteoMobile.Views
             }
         }
 
-        private void toolPicker_Activated(object sender, EventArgs e)
+        private void ToolPicker_Activated(object sender, EventArgs e)
         {
             picker.MaximumDate = DateTimeOffset.UtcNow.Date;
             Device.BeginInvokeOnMainThread(() =>

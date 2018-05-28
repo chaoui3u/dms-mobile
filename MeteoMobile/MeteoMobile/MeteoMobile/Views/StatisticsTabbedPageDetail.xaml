@@ -6,7 +6,7 @@
     <!--Pages can be added as references or inline-->
 
     <TabbedPage.ToolbarItems>
-        <ToolbarItem  x:Name="toolPicker" Activated="toolPicker_Activated" Text="Choisir une date" Order="Primary" Priority="0" />
+        <ToolbarItem  x:Name="ToolPicker" Activated="ToolPicker_Activated" Text="Choisir une date" Order="Primary" Priority="0" />
     </TabbedPage.ToolbarItems>
     
     <ContentPage Title="Température">

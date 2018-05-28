@@ -16,7 +16,7 @@ namespace MeteoMobile.Views
 		public LoginPage ()
 		{
 			InitializeComponent ();
-            login.Text = "admin@test.local";
+            login.Text = "admin@test2.local";
             pass.Text = "Password123!";
 		}
 

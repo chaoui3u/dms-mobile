@@ -1,4 +1,7 @@
-﻿using MeteoMobile.ViewModels;
+﻿using MeteoMobile.Helpers;
+using MeteoMobile.Models;
+using MeteoMobile.Services;
+using MeteoMobile.ViewModels;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -58,6 +61,24 @@ namespace MeteoMobile.Views
  
         }
 
+        private async void Modify_Clicked(object sender, EventArgs e)
+        {
+            var vm = new ModifyUserViewModel();
+            var userSelected = ((MenuItem)sender).CommandParameter as UserModel;
+            Constants.userStatic = userSelected;
+            //await PutTaskDelay(2000);
 
+            await Navigation.PushModalAsync(new NavigationPage(new ModifyUserPage()));
+        }
+       
+        private void Delete_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private async void SignUpPicker_Activated(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new NavigationPage(new SignUpPage()));
+        }
     }
 }

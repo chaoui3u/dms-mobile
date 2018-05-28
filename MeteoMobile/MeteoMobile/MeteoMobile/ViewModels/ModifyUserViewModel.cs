@@ -11,7 +11,7 @@ using Xamarin.Forms;
 
 namespace MeteoMobile.ViewModels
 {
-    class SignUpViewModel 
+    public class ModifyUserViewModel 
     {
         ApiServices _apiServices = new ApiServices();
 
@@ -49,23 +49,25 @@ namespace MeteoMobile.ViewModels
             get;
             set;
         }
-        
 
 
-        public ICommand SignUpCommand
+
+        public ICommand ModifyUserCommand
         {
             get
             {
-                return new Command(async() => 
+                return new Command(async () =>
                 {
-                    
-                        var isSuccess = await _apiServices.SignUpAsync(Settings.AccessToken,FirstName,
-                            LastName, Password, Email, Role);
-                        
-                });
-          
-            }
-        }
 
+                var isSuccess = await _apiServices.ModifyUserAsync(Settings.AccessToken, 
+                        Constants.userStatic.Id,FirstName,
+                        LastName, Password, Email, Role);
+                    
+
+                });
+
+            }
+
+        }
     }
 }

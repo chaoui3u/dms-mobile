@@ -24,15 +24,16 @@ namespace MeteoMobile.ViewModels
                         var accesstoken = await _apiServices.LoginAsync(Username, Password);
 
                         Settings.AccessToken = accesstoken;
-                   
+                        Settings.Username = Username;
+                         Settings.Password = Password;
                 });
             }
         }
 
-        public LoginViewModel()
-        {
-            Username = Settings.Username;
-            Password = Settings.Password;
-        }
+        //public LoginViewModel()
+        //{
+        //    Username = Settings.Username;
+        //    Password = Settings.Password;
+        //}
     }
 }

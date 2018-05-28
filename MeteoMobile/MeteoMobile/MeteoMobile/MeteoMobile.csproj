@@ -20,8 +20,8 @@
     <Compile Update="Views\ProfilePageDetail.xaml.cs">
       <DependentUpon>ProfilePageDetail.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\SignUpPageDetail.xaml.cs">
-      <DependentUpon>SignUpPageDetail.xaml</DependentUpon>
+    <Compile Update="Views\SignUpPage.xaml.cs">
+      <DependentUpon>SignUpPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\StatisticsTabbedPageDetail.xaml.cs">
       <DependentUpon>StatisticsTabbedPageDetail.xaml</DependentUpon>
@@ -50,7 +50,7 @@
     <EmbeddedResource Update="Views\ProfilePageDetail.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\SignUpPageDetail.xaml">
+    <EmbeddedResource Update="Views\SignUpPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\StatisticsTabbedPageDetail.xaml">

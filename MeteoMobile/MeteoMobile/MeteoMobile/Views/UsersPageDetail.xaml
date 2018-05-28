@@ -7,6 +7,9 @@
     <ContentPage.BindingContext>
         <viewModels:UsersViewModel/>
     </ContentPage.BindingContext>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem  x:Name="SignUpPicker" Activated="SignUpPicker_Activated" Text="Ajouter" Order="Primary" Priority="0" />
+    </ContentPage.ToolbarItems>
 
     
     <ListView x:Name="MyListView"
@@ -20,12 +23,19 @@
         
         <ListView.ItemTemplate>
             <DataTemplate>
-                
                 <ViewCell>
+                    <ViewCell.ContextActions>
+                        <MenuItem Text="Modifier" Clicked="Modify_Clicked" CommandParameter="{Binding .}"/>
+                        <MenuItem Text="Supprimer" Clicked="Delete_Clicked"/>
+                    </ViewCell.ContextActions>
                     <StackLayout>
+
                         <Label Text="{Binding Email}" TextColor="Black"/>
                         <Label Text="{Binding FirstName}" TextColor="Black"/>
                         <Label Text="{Binding LastName}" TextColor="Black"/>
+                        <Label Text="{Binding Role}" TextColor="Black"/>
+                        <Label Text="{Binding CreatedBy}" TextColor="Black"/>
+                        <Label Text="{Binding CreatedAt}" TextColor="Black"/>
                     </StackLayout>
                 </ViewCell>
             </DataTemplate>
