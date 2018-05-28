@@ -42,6 +42,8 @@ namespace MeteoMobile.Views
                     new HomePageMenuItem { Id = 3, Title = "Statistics" , TargetType=typeof(StatisticsTabbedPageDetail)},
                     new HomePageMenuItem { Id = 4, Title = "Se déconnecter" , TargetType=typeof(LogoutPage)},
                 });
+                if(Constants.MyUser.Role != "Admin")
+                     MenuItems.RemoveAt(2);
             }
             
             #region INotifyPropertyChanged Implementation

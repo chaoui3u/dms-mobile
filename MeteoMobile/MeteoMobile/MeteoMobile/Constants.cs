@@ -10,9 +10,10 @@ namespace MeteoMobile
     {
         public static string BaseApiAddress => "https://192.168.0.103:44320/";
         public static string SignUpUrl => "https://192.168.0.103:44320/authentification/signup/";
-        public static string getUsersUrl => "https://192.168.0.103:44320/authentification/users/";
-        public static string getWeatherRecordsUrl => "https://192.168.0.103:44320/weatherrecord/";
-        public static string getMyUserUrl => "https://192.168.0.103:44320/authentification/users/me/";
-        public static UserModel userStatic { get; set; }
+        public static string GetUsersUrl => "https://192.168.0.103:44320/authentification/users/";
+        public static string GetWeatherRecordsUrl => "https://192.168.0.103:44320/weatherrecord/";
+        public static string GetMyUserUrl => "https://192.168.0.103:44320/authentification/users/me/";
+        public static UserModel ThiUser { get; set; }
+        public static UserModel MyUser { get; set; }
     }
 }

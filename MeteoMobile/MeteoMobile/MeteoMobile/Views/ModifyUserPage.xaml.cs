@@ -23,12 +23,12 @@ namespace MeteoMobile.Views
         }
         protected override void OnAppearing()
         {
-            firstName.Text = Constants.userStatic.FirstName;
-            lastName.Text = Constants.userStatic.LastName;
+            firstName.Text = Constants.ThiUser.FirstName;
+            lastName.Text = Constants.ThiUser.LastName;
             password.Text = Settings.Password;
             confirmPassword.Text = Settings.Password;
-            email.Text = Constants.userStatic.Email;
-            rolePicker.SelectedItem = Constants.userStatic.Role;
+            email.Text = Constants.ThiUser.Email;
+            rolePicker.SelectedItem = Constants.ThiUser.Role;
         }
     }
 }

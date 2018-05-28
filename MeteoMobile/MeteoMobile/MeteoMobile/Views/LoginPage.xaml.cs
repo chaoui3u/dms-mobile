@@ -1,4 +1,5 @@
 ﻿using MeteoMobile.Helpers;
+using MeteoMobile.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,8 +27,14 @@ namespace MeteoMobile.Views
             await PutTaskDelay(5000);
             if (string.IsNullOrEmpty(Settings.AccessToken))
                 await PutTaskDelay(2000);
-            if (!string.IsNullOrEmpty(Settings.AccessToken))
+            if (!string.IsNullOrEmpty(Settings.AccessToken)) {
+                Settings.Username = login.Text;
+                Settings.Password = pass.Text;
+                Constants.MyUser = await new ApiServices().GetMyUserAsync(Settings.AccessToken);
+                if(Constants.MyUser == null)
+                    await PutTaskDelay(2000);
                 await Navigation.PushModalAsync(new HomePage());
+            }
             else
                 await DisplayAlert("Echec", "Veuillez Recommencer", "Ok");
         }

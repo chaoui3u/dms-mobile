@@ -65,7 +65,7 @@ namespace MeteoMobile.Views
         {
             var vm = new ModifyUserViewModel();
             var userSelected = ((MenuItem)sender).CommandParameter as UserModel;
-            Constants.userStatic = userSelected;
+            Constants.ThiUser = userSelected;
             //await PutTaskDelay(2000);
 
             await Navigation.PushModalAsync(new NavigationPage(new ModifyUserPage()));

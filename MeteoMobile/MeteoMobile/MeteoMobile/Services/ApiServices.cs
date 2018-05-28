@@ -43,7 +43,8 @@ namespace MeteoMobile.Services
 
                 //saving access token in preferences
                 Settings.AccessTokenExpirationDate = accessTokenExpiration;
-               
+
+                System.Diagnostics.Debug.WriteLine(response.StatusCode + " / " + response.ReasonPhrase + " / " + response.RequestMessage);
                 System.Diagnostics.Debug.WriteLine(accessTokenExpiration);
 
                 System.Diagnostics.Debug.WriteLine(content);
@@ -82,7 +83,7 @@ namespace MeteoMobile.Services
 
             var response = await client.PostAsync(Constants.SignUpUrl, content);
 
-            System.Diagnostics.Debug.WriteLine(response.StatusCode+"/"+response.ReasonPhrase);
+            System.Diagnostics.Debug.WriteLine(response.StatusCode + " / " + response.ReasonPhrase + " / " + response.RequestMessage);
             return response.IsSuccessStatusCode;
         }
 
@@ -113,9 +114,9 @@ namespace MeteoMobile.Services
             //validating certificate to use https
             ServicePointManager.ServerCertificateValidationCallback = CertificateValidation.MyRemoteCertificateValidationCallback;
 
-            var response = await client.PutAsync(Constants.getUsersUrl+userId, content);
+            var response = await client.PutAsync(Constants.GetUsersUrl+userId, content);
 
-            System.Diagnostics.Debug.WriteLine(response.StatusCode + "/" + response.ReasonPhrase);
+            System.Diagnostics.Debug.WriteLine(response.StatusCode + " / " + response.ReasonPhrase+" / "+response.RequestMessage);
 
             return response.IsSuccessStatusCode;
         }
@@ -128,7 +129,7 @@ namespace MeteoMobile.Services
             //validating certificate to use https
             ServicePointManager.ServerCertificateValidationCallback = CertificateValidation.MyRemoteCertificateValidationCallback;
 
-            var json = await client.GetStringAsync(Constants.getUsersUrl);
+            var json = await client.GetStringAsync(Constants.GetUsersUrl);
 
             JObject jsonResponse = JObject.Parse(json);
             JArray objResponse = (JArray)jsonResponse["value"];
@@ -150,7 +151,7 @@ namespace MeteoMobile.Services
             //validating certificate to use https
             ServicePointManager.ServerCertificateValidationCallback = CertificateValidation.MyRemoteCertificateValidationCallback;
 
-            var json = await client.GetStringAsync(Constants.getMyUserUrl);
+            var json = await client.GetStringAsync(Constants.GetMyUserUrl);
             JObject jsonResponse = JObject.Parse(json);
 
             var user = JsonConvert.DeserializeObject<UserModel>(jsonResponse.ToString());
@@ -164,7 +165,7 @@ namespace MeteoMobile.Services
                 new AuthenticationHeaderValue("Bearer", accessToken);
             //validating certificate to use https
             ServicePointManager.ServerCertificateValidationCallback = CertificateValidation.MyRemoteCertificateValidationCallback;
-            var url = Constants.getWeatherRecordsUrl + dateTime.Year+"-"+dateTime.Month+"-"+dateTime.Day+"T00:00:00" 
+            var url = Constants.GetWeatherRecordsUrl + dateTime.Year+"-"+dateTime.Month+"-"+dateTime.Day+"T00:00:00" 
                 + "/" + dateTime.Year + "-" + dateTime.Month + "-" + dateTime.Day + "T23:59:59";
             var json = await client.GetStringAsync(url);
             

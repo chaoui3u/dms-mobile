@@ -20,12 +20,9 @@ namespace MeteoMobile.ViewModels
             {
                 return new Command(async () =>
                 {
-                   
-                        var accesstoken = await _apiServices.LoginAsync(Username, Password);
-
-                        Settings.AccessToken = accesstoken;
-                        Settings.Username = Username;
-                         Settings.Password = Password;
+       
+                    Settings.AccessToken = await _apiServices.LoginAsync(Username, Password);
+                    
                 });
             }
         }

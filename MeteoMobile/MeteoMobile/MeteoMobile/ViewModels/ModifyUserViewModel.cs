@@ -60,7 +60,7 @@ namespace MeteoMobile.ViewModels
                 {
 
                 var isSuccess = await _apiServices.ModifyUserAsync(Settings.AccessToken, 
-                        Constants.userStatic.Id,FirstName,
+                        Constants.ThiUser.Id,FirstName,
                         LastName, Password, Email, Role);
                     
 
