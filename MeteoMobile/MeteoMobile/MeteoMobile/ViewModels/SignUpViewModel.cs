@@ -51,6 +51,8 @@ namespace MeteoMobile.ViewModels
             get;
             set;
         }
+
+        public bool IsSuccess { get; set; }
         
 
 
@@ -61,10 +63,9 @@ namespace MeteoMobile.ViewModels
                 return new Command(async() => 
                 {
                     
-                   var isSuccess = await _apiServices.SignUpAsync(Settings.AccessToken,FirstName,
+                    IsSuccess = await _apiServices.SignUpAsync(Settings.AccessToken,FirstName,
                             LastName, Password, Email, Role);
-                    if (isSuccess) Constants.CurrentResult = true;
-                    else Constants.CurrentResult = false;
+
                 });
           
             }

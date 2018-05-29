@@ -18,20 +18,17 @@ namespace MeteoMobile.Views
     public partial class UsersPageDetail : ContentPage
     {
  
-       // UsersViewModel vm = new UsersViewModel();
         public UsersPageDetail()
         {
             InitializeComponent();
-            //vm.GetUsersCommand.Execute(null);
-            //vm.IsBusy = true;
      
         }
 
         protected override  void OnAppearing()
         {
-            //await PutTaskDelay(3000);
-            //if(vm.Users == null)
-            //await PutTaskDelay(1000);
+            //getting the current view model bound to this page
+            var vm = (UsersViewModel)this.BindingContext;
+            vm.GetUsersCommand.Execute(null);
             //MyListView.ItemsSource = vm.Users;
         }
         async Task PutTaskDelay(int delay)
@@ -39,18 +36,18 @@ namespace MeteoMobile.Views
             await Task.Delay(delay);
         }
 
-        async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
-        {
-            if (e.Item == null)
-                return;
+        //async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
+        //{
+        //    if (e.Item == null)
+        //        return;
 
-            await DisplayAlert("Item Tapped", "An item was tapped.", "OK");
+        //    await DisplayAlert("Item Tapped", "An item was tapped.", "OK");
 
-            //Deselect Item
-            ((ListView)sender).SelectedItem = null;
+        //    //Deselect Item
+        //    ((ListView)sender).SelectedItem = null;
 
  
-        }
+        //}
 
         private async void Modify_Clicked(object sender, EventArgs e)
         {
@@ -63,7 +60,8 @@ namespace MeteoMobile.Views
         {
             Constants.ThisUser = ((MenuItem)sender).CommandParameter as UserModel;
             await PutTaskDelay(5000);
-            DisplayConfirmAlert(Constants.CurrentResult);
+            var vm = (UsersViewModel)this.BindingContext;
+            DisplayConfirmAlert(vm.IsSuccess);
         }
 
         private async void SignUpToolBar_Activated(object sender, EventArgs e)

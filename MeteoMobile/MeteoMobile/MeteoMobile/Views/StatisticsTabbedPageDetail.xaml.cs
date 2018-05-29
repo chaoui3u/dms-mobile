@@ -53,7 +53,7 @@ namespace MeteoMobile.Views
                 await PutTaskDelay(1000);
             if (vm.WeatherRecords == null || vm.WeatherRecords.Count() == 0)
             {
-                await DisplayAlert("404 Rien de trouvé", "Rien n'a était touvé a cette date.", "ok");
+                await DisplayAlert("Erreur 404", "Rien n'a était touvé à cette date.", "ok");
             }
             else
             {

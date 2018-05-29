@@ -51,7 +51,7 @@ namespace MeteoMobile.ViewModels
             get;
             set;
         }
-
+        public bool IsSuccess { get; set; }
 
 
         public ICommand ModifyUserCommand
@@ -60,12 +60,9 @@ namespace MeteoMobile.ViewModels
             {
                 return new Command(async () =>
                 {
-
-                var isSuccess = await _apiServices.ModifyUserAsync(Settings.AccessToken, 
+                     IsSuccess = await _apiServices.ModifyUserAsync(Settings.AccessToken, 
                         Constants.ThisUser.Id,FirstName,
                         LastName, Password, Email, Role);
-                    if (isSuccess) Constants.CurrentResult = true;
-                    else Constants.CurrentResult = false;
                 });
 
             }

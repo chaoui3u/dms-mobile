@@ -30,11 +30,17 @@ namespace MeteoMobile.ViewModels
             get { return _isBusy; }
             set { _isBusy = value; OnPropertyChanged(nameof(IsBusy)); }
         }
-
-        public UsersViewModel()
+        private bool _isSuccess;
+        public bool IsSuccess
         {
-            GetUsersCommand.Execute(null);
+            get { return _isSuccess; }
+            set { _isSuccess = value; OnPropertyChanged(nameof(IsSuccess)); }
         }
+
+        //public UsersViewModel()
+        //{
+        //    GetUsersCommand.Execute(null);
+        //}
 
         public ICommand GetUsersCommand
         {
@@ -57,11 +63,10 @@ namespace MeteoMobile.ViewModels
                 {
                     IsBusy = true;
                     await PutTaskDelay(2000);
-                    var isSuccess= await _apiServices.DeleteUserAsync(Settings.AccessToken, Constants.ThisUser.Id);
-                    if (isSuccess)
+                    IsSuccess= await _apiServices.DeleteUserAsync(Settings.AccessToken, Constants.ThisUser.Id);
+                    if (IsSuccess)
                     {
                         GetUsersCommand.Execute(null);
-                        Constants.CurrentResult = true;
                     }
                 });
             }
