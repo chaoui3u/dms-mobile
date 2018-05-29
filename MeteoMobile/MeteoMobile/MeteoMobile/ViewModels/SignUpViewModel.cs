@@ -63,6 +63,8 @@ namespace MeteoMobile.ViewModels
                     
                    var isSuccess = await _apiServices.SignUpAsync(Settings.AccessToken,FirstName,
                             LastName, Password, Email, Role);
+                    if (isSuccess) Constants.CurrentResult = true;
+                    else Constants.CurrentResult = false;
                 });
           
             }

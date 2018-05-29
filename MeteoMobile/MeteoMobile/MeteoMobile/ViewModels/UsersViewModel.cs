@@ -33,7 +33,6 @@ namespace MeteoMobile.ViewModels
 
         public UsersViewModel()
         {
-            IsBusy = true;
             GetUsersCommand.Execute(null);
         }
 
@@ -43,7 +42,9 @@ namespace MeteoMobile.ViewModels
             {
                 return new Command(async () =>
                 {
+                    IsBusy = true;
                     Users = await _apiServices.GetUsersAsync(Settings.AccessToken);
+                    await PutTaskDelay(500);
                     IsBusy = false;
                 });
             }
@@ -57,7 +58,11 @@ namespace MeteoMobile.ViewModels
                     IsBusy = true;
                     await PutTaskDelay(2000);
                     var isSuccess= await _apiServices.DeleteUserAsync(Settings.AccessToken, Constants.ThisUser.Id);
-                    if(isSuccess) GetUsersCommand.Execute(null);
+                    if (isSuccess)
+                    {
+                        GetUsersCommand.Execute(null);
+                        Constants.CurrentResult = true;
+                    }
                 });
             }
         }

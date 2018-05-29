@@ -8,7 +8,7 @@
         <viewModels:UsersViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.ToolbarItems>
-        <ToolbarItem  x:Name="SignUpPicker" Activated="SignUpPicker_Activated" Text="Ajouter" Order="Primary" Priority="0" />
+        <ToolbarItem  x:Name="SignUpToolBar" Activated="SignUpToolBar_Activated" Text="Ajouter" Order="Primary" Priority="0" />
     </ContentPage.ToolbarItems>
 
     
@@ -23,7 +23,7 @@
         
         
         <!--Built in Cells-->
-        
+
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
@@ -44,20 +44,6 @@
             </DataTemplate>
         </ListView.ItemTemplate>
 
-        <!--Custom View Cells-->
-        
-    <!--<ListView.ItemTemplate>
-      <DataTemplate>
-        <ViewCell>
-          <StackLayout>
-            <Label Text="{Binding Text}" 
-                   Style="{DynamicResource ListItemTextStyle}" />
-            <Label Text="{Binding Detail}" 
-                   Style="{DynamicResource ListItemDetailTextStyle}"/>
-          </StackLayout>
-        </ViewCell>
-      </DataTemplate>
-    </ListView.ItemTemplate>-->
-    
+
     </ListView>
 </ContentPage>

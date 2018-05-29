@@ -17,21 +17,11 @@ namespace MeteoMobile.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class UsersPageDetail : ContentPage
     {
-        //public ObservableCollection<string> Items { get; set; }
-        UsersViewModel vm = new UsersViewModel();
+ 
+       // UsersViewModel vm = new UsersViewModel();
         public UsersPageDetail()
         {
             InitializeComponent();
-
-            //         Items = new ObservableCollection<string>
-            //         {
-            //             "Item 1",
-            //             "Item 2",
-            //             "Item 3",
-            //             "Item 4",
-            //             "Item 5"
-            //         };
- 
             //vm.GetUsersCommand.Execute(null);
             //vm.IsBusy = true;
      
@@ -69,14 +59,28 @@ namespace MeteoMobile.Views
             await Navigation.PushModalAsync(new NavigationPage(new ModifyUserPage()));
         }
        
-        private void Delete_Clicked(object sender, EventArgs e)
+        private async void Delete_Clicked(object sender, EventArgs e)
         {
             Constants.ThisUser = ((MenuItem)sender).CommandParameter as UserModel;
+            await PutTaskDelay(5000);
+            DisplayConfirmAlert(Constants.CurrentResult);
         }
 
-        private async void SignUpPicker_Activated(object sender, EventArgs e)
+        private async void SignUpToolBar_Activated(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new NavigationPage(new SignUpPage()));
         }
+
+        public void DisplayConfirmAlert(bool result)
+        {
+            if (result)
+            {
+                DisplayAlert("Succès", "Votre utilisateur à était supprimé avec succès", "Ok");
+                Constants.CurrentResult = false;
+            }
+            else DisplayAlert("Echec", "Votre utilisateur n'a pas était supprimé", "Ok");
+        }
+
+
     }
 }

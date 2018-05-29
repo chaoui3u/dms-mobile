@@ -15,5 +15,6 @@ namespace MeteoMobile
         public static string GetMyUserUrl => "https://192.168.0.103:44320/authentification/users/me/";
         public static UserModel ThisUser { get; set; }
         public static UserModel MyUser { get; set; }
+        public static bool CurrentResult { get; set; }
     }
 }

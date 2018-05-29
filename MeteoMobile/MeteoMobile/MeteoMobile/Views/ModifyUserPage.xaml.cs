@@ -25,10 +25,29 @@ namespace MeteoMobile.Views
         {
             firstName.Text = Constants.ThisUser.FirstName;
             lastName.Text = Constants.ThisUser.LastName;
-            password.Text = Settings.Password;
-            confirmPassword.Text = Settings.Password;
             email.Text = Constants.ThisUser.Email;
             rolePicker.SelectedItem = Constants.ThisUser.Role;
         }
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            await PutTaskDelay(5000);
+            DisplayConfirmAlert(Constants.CurrentResult);
+            await App.Current.MainPage.Navigation.PopModalAsync();
+        }
+        public void DisplayConfirmAlert(bool result)
+        {
+            if (result)
+            {
+                DisplayAlert("Succès", "Votre utilisateur à était modifié avec succès", "Ok");
+                Constants.CurrentResult = false;
+            }
+            else DisplayAlert("Echec", "Votre utilisateur n'a pas était modifié", "Ok");
+        }
+        async Task PutTaskDelay(int delay)
+        {
+            await Task.Delay(delay);
+        }
+
     }
 }

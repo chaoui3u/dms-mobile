@@ -21,7 +21,7 @@
                 </Picker.Items>
             </Picker>
 
-            <Button  Command="{Binding SignUpCommand} " Text="Enregistrer" />
+            <Button  Command="{Binding SignUpCommand} " Text="Enregistrer" Clicked="Button_Clicked"/>
 
         </StackLayout>
     </ContentPage.Content>

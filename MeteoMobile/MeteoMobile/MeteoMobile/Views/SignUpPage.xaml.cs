@@ -22,6 +22,26 @@ namespace MeteoMobile.Views
             Title = "enregistrer un utilisateur";
         }
 
-       
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            await PutTaskDelay(5000);
+            DisplayConfirmAlert(Constants.CurrentResult);
+            await App.Current.MainPage.Navigation.PopModalAsync();
+        }
+
+        public void DisplayConfirmAlert(bool result)
+        {
+            if (result)
+            {
+                DisplayAlert("Succès", "Votre utilisateur a était enregistré avec succès", "Ok");
+                Constants.CurrentResult = false;
+            }
+            else DisplayAlert("Echec", "Votre utilisateur n'a pas était enregistré", "Ok");
+        }
+        async Task PutTaskDelay(int delay)
+        {
+            await Task.Delay(delay);
+        }
     }
 }
