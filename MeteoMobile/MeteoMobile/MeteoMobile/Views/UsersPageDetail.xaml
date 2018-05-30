@@ -15,7 +15,6 @@
     <ListView x:Name="MyListView"
             ItemsSource="{Binding Users}"
             HasUnevenRows="True"
-            ItemTapped="Handle_ItemTapped"
             CachingStrategy="RecycleElement"
               IsPullToRefreshEnabled="True"
               RefreshCommand="{Binding GetUsersCommand}"

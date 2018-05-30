@@ -23,17 +23,29 @@ namespace MeteoMobile.Views
         }
         protected override void OnAppearing()
         {
-            firstName.Text = Constants.ThisUser.FirstName;
-            lastName.Text = Constants.ThisUser.LastName;
-            email.Text = Constants.ThisUser.Email;
-            rolePicker.SelectedItem = Constants.ThisUser.Role;
+            if (Constants.ThisUser != null)
+            {
+                firstName.Text = Constants.ThisUser.FirstName;
+                lastName.Text = Constants.ThisUser.LastName;
+                email.Text = Constants.ThisUser.Email;
+                rolePicker.SelectedItem = Constants.ThisUser.Role;
+            }else
+            {
+                firstName.Text = Constants.MyUser.FirstName;
+                lastName.Text = Constants.MyUser.LastName;
+                email.Text = Constants.MyUser.Email;
+                rolePicker.SelectedItem = Constants.MyUser.Role;
+                password.Text = Settings.Password;
+                confirmPassword.Text = Settings.Password;
+            }
         }
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
             await PutTaskDelay(5000);
             var vm = (ModifyUserViewModel)this.BindingContext;
-            DisplayConfirmAlert(vm.IsSuccess);          
+            DisplayConfirmAlert(vm.IsSuccess);
+            Constants.ThisUser = null;
             await App.Current.MainPage.Navigation.PopModalAsync();
         }
         public void DisplayConfirmAlert(bool result)

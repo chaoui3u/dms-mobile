@@ -113,9 +113,12 @@ namespace MeteoMobile.Services
 
             //validating certificate to use https
             ServicePointManager.ServerCertificateValidationCallback = CertificateValidation.MyRemoteCertificateValidationCallback;
+            HttpResponseMessage response;
 
-            var response = await client.PutAsync(Constants.GetUsersUrl+userId, content);
-
+            if (Constants.MyUser.Role == "Admin")
+             response = await client.PutAsync(Constants.GetUsersUrl+userId, content);
+            else
+             response = await client.PutAsync(Constants.GetMyUserUrl, content);
             System.Diagnostics.Debug.WriteLine(response.StatusCode + " / " + response.ReasonPhrase+" / "+response.RequestMessage);
 
             return response.IsSuccessStatusCode;
@@ -171,6 +174,8 @@ namespace MeteoMobile.Services
             var user = JsonConvert.DeserializeObject<UserModel>(jsonResponse.ToString());
             return user;
         }
+
+
 
         public async Task<List<WeatherRecordModel>> GetWeatherRecordsAsync(string accessToken,DateTimeOffset dateTime)
         {

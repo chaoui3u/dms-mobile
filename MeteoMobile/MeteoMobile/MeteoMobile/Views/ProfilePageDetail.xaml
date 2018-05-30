@@ -1,12 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:vm="clr-namespace:MeteoMobile.ViewModels"
              x:Class="MeteoMobile.Views.ProfilePageDetail">
+    <ContentPage.BindingContext>
+        <vm:ProfileViewModel/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <ScrollView>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="0" Grid.Row="0" Text="Bienvenue"/>
+                    <Label Grid.Column="1" Grid.Row="0" x:Name="nameLabel"/>
+                    
+                    <Label Grid.Column="0" Grid.Row="1" Text="Votre Email :"/>
+                    <Label Grid.Column="1" Grid.Row="1" x:Name="emailLabel" Text="{Binding Email}"/>
+
+                    <Label  Grid.Column="0" Grid.Row="2" Text="Date de la création du compte :"/>
+                    <Label  Grid.Column="1" Grid.Row="2" x:Name="dateCreationLabel" Text="{Binding CreatedAt.DateTime}"/>
+
+                    <Label  Grid.Column="0" Grid.Row="3" Text="vous êtes connécté en tant que :"/>
+                    <Label  Grid.Column="1" Grid.Row="3" x:Name="roleLabel" Text="{Binding Role}"/>
+
+                    <Button  Grid.Column="1" Grid.Row="6" Text="Modfier" Clicked="Button_Clicked"/>
+                </Grid>
+            </ScrollView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

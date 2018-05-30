@@ -54,6 +54,7 @@ namespace MeteoMobile.Views
             Constants.ThisUser = ((MenuItem)sender).CommandParameter as UserModel;
 
             await Navigation.PushModalAsync(new NavigationPage(new ModifyUserPage()));
+
         }
        
         private async void Delete_Clicked(object sender, EventArgs e)
@@ -62,6 +63,7 @@ namespace MeteoMobile.Views
             await PutTaskDelay(5000);
             var vm = (UsersViewModel)this.BindingContext;
             DisplayConfirmAlert(vm.IsSuccess);
+            Constants.ThisUser = null;
         }
 
         private async void SignUpToolBar_Activated(object sender, EventArgs e)
@@ -74,7 +76,6 @@ namespace MeteoMobile.Views
             if (result)
             {
                 DisplayAlert("Succès", "Votre utilisateur à était supprimé avec succès", "Ok");
-                Constants.CurrentResult = false;
             }
             else DisplayAlert("Echec", "Votre utilisateur n'a pas était supprimé", "Ok");
         }
