@@ -19,12 +19,12 @@ namespace MeteoMobile.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class StatisticsTabbedPageDetail : TabbedPage
     {
-        WeatherRecordViewModel vm = new WeatherRecordViewModel();
+        WeatherRecordViewModel vm;
         //DateTimeOffset dateCaptured;
         public StatisticsTabbedPageDetail ()
         {
             InitializeComponent();
-           
+            vm = (WeatherRecordViewModel)this.BindingContext;
      
         }
         protected override  void OnAppearing()
@@ -45,13 +45,10 @@ namespace MeteoMobile.Views
 
         private async void DatePicker_DateSelected(object sender, DateChangedEventArgs e)
         {
-            //dateCaptured = e.NewDate;
             vm.DateTimeChosen = e.NewDate;
             vm.GetWeatherRecordsCommand.Execute(null);
-            await PutTaskDelay(2400);
-            if (vm.WeatherRecords == null)
-                await PutTaskDelay(1000);
-            if (vm.WeatherRecords == null || vm.WeatherRecords.Count() == 0)
+             await PutTaskDelay(400);
+            if (!vm.IsSuccess)
             {
                 await DisplayAlert("Erreur 404", "Rien n'a était touvé à cette date.", "ok");
             }

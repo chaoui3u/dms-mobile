@@ -13,6 +13,7 @@ namespace MeteoMobile.ViewModels
 {
     public class WeatherRecordViewModel : INotifyPropertyChanged
     {
+   
         ApiServices _apiServices = new ApiServices();
         private List<WeatherRecordModel> _weatherRecords;
         private DateTimeOffset _dateTime;
@@ -20,15 +21,20 @@ namespace MeteoMobile.ViewModels
         public DateTimeOffset DateTimeChosen
         {
             get { return _dateTime;  }
-            set { _dateTime = value; OnPropertyChanged(); }
+            set { _dateTime = value; OnPropertyChanged(nameof(DateTimeChosen)); }
         }
 
         public List<WeatherRecordModel> WeatherRecords
         {
             get { return _weatherRecords; }
-            set { _weatherRecords = value; OnPropertyChanged();}
+            set { _weatherRecords = value; OnPropertyChanged(nameof(WeatherRecords));}
         }
-
+        private bool _isSuccess;
+        public bool IsSuccess
+        {
+            get { return _isSuccess; }
+            set { _isSuccess = value; OnPropertyChanged(nameof(IsSuccess)); }
+        }
         public ICommand GetWeatherRecordsCommand
         {
             get
@@ -36,6 +42,8 @@ namespace MeteoMobile.ViewModels
                 return new Command(async () =>
                 {
                     WeatherRecords = await _apiServices.GetWeatherRecordsAsync(Settings.AccessToken,DateTimeChosen);
+                    if (WeatherRecords == null || WeatherRecords.Count == 0) IsSuccess = false;
+                    else IsSuccess = true;
                 });
             }
         }
