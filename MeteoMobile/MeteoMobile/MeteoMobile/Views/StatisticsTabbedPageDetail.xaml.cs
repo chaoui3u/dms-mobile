@@ -35,7 +35,6 @@ namespace MeteoMobile.Views
             {
                 picker.Focus();
             });
- 
         }
 
         async Task PutTaskDelay(int delay)
@@ -47,14 +46,16 @@ namespace MeteoMobile.Views
         {
             vm.DateTimeChosen = e.NewDate;
             vm.GetWeatherRecordsCommand.Execute(null);
-             await PutTaskDelay(400);
-            if (!vm.IsSuccess)
+             await PutTaskDelay(5000);
+            var weatherRecords = vm.WeatherRecords;
+            if (!vm.IsSuccess || weatherRecords.Count() < 18)
             {
-                await DisplayAlert("Erreur 404", "Rien n'a était touvé à cette date.", "ok");
+                await DisplayAlert("Erreur 404", "Pas assez de valeur pour faire la moyenne de 3H.", "ok");
+            
             }
             else
             {
-                var weatherRecords = vm.WeatherRecords;
+
 
                 var charts = new ChartsSettings(weatherRecords);
 
@@ -64,6 +65,7 @@ namespace MeteoMobile.Views
                 windChart.Chart = new LineChart { Entries = charts.WindSpeed(weatherRecords.Count()) };
                 humidityChart.Chart = new BarChart { Entries = charts.Humidity(weatherRecords.Count()) };
                 pressureChart.Chart = new PointChart { Entries = charts.Pressure(weatherRecords.Count()) };
+                tempraturePage.IsBusy = false;
             }
         }
 

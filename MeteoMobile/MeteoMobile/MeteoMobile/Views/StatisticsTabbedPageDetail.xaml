@@ -13,11 +13,11 @@
         <ToolbarItem  x:Name="ToolPicker" Activated="ToolPicker_Activated" Text="Choisir une date" Order="Primary" Priority="0" />
     </TabbedPage.ToolbarItems>
     
-    <ContentPage Title="Température">
+    <ContentPage x:Name="tempraturePage" Title="Température" >
         <ContentPage.Content>
             <ScrollView>
                 <StackLayout>
-                    <DatePicker x:Name="picker" MinimumDate="05/23/2018" DateSelected="DatePicker_DateSelected" IsVisible="False"/>
+                    <DatePicker x:Name="picker" MinimumDate="05/30/2018" DateSelected="DatePicker_DateSelected" IsVisible="False"/>
                     <forms:ChartView x:Name="tempratureChart"  HeightRequest="400" />
                 </StackLayout>
             </ScrollView>

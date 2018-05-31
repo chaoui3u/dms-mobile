@@ -184,10 +184,13 @@ namespace MeteoMobile.Services
                 new AuthenticationHeaderValue("Bearer", accessToken);
             //validating certificate to use https
             ServicePointManager.ServerCertificateValidationCallback = CertificateValidation.MyRemoteCertificateValidationCallback;
-            var url = Constants.GetWeatherRecordsUrl + dateTime.Year+"-"+dateTime.Month+"-"+dateTime.Day+"T00:00:00" 
-                + "/" + dateTime.Year + "-" + dateTime.Month + "-" + dateTime.Day + "T23:59:59";
+            var month = (int.Parse(dateTime.AddDays(1).Day.ToString()) == 1) ? dateTime.AddMonths(1).Month : dateTime.Month;
+            var year = (int.Parse(dateTime.AddMonths(1).Month.ToString()) == 1) ? dateTime.AddYears(1).Year : dateTime.Year;
+
+            var url = Constants.GetWeatherRecordsUrl + dateTime.Year+"-"+dateTime.Month+"-"+dateTime.Day+"T00:10:00" 
+                + "/" + year + "-" + month  + "-" + dateTime.AddDays(1).Day + "T00:00:00";
             var json = await client.GetStringAsync(url);
-            
+          
             JObject jsonResponse = JObject.Parse(json);
             JArray objResponse = (JArray)jsonResponse["value"];
 
