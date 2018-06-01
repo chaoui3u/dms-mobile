@@ -30,7 +30,7 @@ namespace MeteoMobile.Views
         protected override  void OnAppearing()
         {
            
-            picker.MaximumDate = DateTimeOffset.UtcNow.Date;
+            picker.MaximumDate = DateTimeOffset.Now.Date;
             Device.BeginInvokeOnMainThread(() => 
             {
                 picker.Focus();
@@ -71,7 +71,7 @@ namespace MeteoMobile.Views
 
         private void ToolPicker_Activated(object sender, EventArgs e)
         {
-            picker.MaximumDate = DateTimeOffset.UtcNow.Date;
+            picker.MaximumDate = DateTimeOffset.Now.Date;
             Device.BeginInvokeOnMainThread(() =>
             {
                 picker.Focus();

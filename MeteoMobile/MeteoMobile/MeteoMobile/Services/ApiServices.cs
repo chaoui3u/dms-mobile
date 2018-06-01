@@ -184,8 +184,10 @@ namespace MeteoMobile.Services
                 new AuthenticationHeaderValue("Bearer", accessToken);
             //validating certificate to use https
             ServicePointManager.ServerCertificateValidationCallback = CertificateValidation.MyRemoteCertificateValidationCallback;
+
+
             var month = (int.Parse(dateTime.AddDays(1).Day.ToString()) == 1) ? dateTime.AddMonths(1).Month : dateTime.Month;
-            var year = (int.Parse(dateTime.AddMonths(1).Month.ToString()) == 1) ? dateTime.AddYears(1).Year : dateTime.Year;
+            var year = (int.Parse(dateTime.AddMonths(1).Month.ToString()) == 1 && int.Parse(dateTime.AddDays(1).Day.ToString()) == 1) ? dateTime.AddYears(1).Year : dateTime.Year;
 
             var url = Constants.GetWeatherRecordsUrl + dateTime.Year+"-"+dateTime.Month+"-"+dateTime.Day+"T00:10:00" 
                 + "/" + year + "-" + month  + "-" + dateTime.AddDays(1).Day + "T00:00:00";
@@ -197,6 +199,41 @@ namespace MeteoMobile.Services
             var weatherRecords = JsonConvert.DeserializeObject<List<WeatherRecordModel>>(objResponse.ToString());
 
             return weatherRecords;
+        }
+
+        public async Task<List<WeatherRecordModel>> GetActualWeatherRecord(string accessToken,DateTimeOffset currentDate)
+        {
+
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", accessToken);
+            //validating certificate to use https
+            ServicePointManager.ServerCertificateValidationCallback = CertificateValidation.MyRemoteCertificateValidationCallback;
+            var month = (int.Parse(currentDate.Day.ToString()) == 1 
+                && int.Parse(currentDate.Minute.ToString()) >= 0 
+                && int.Parse(currentDate.Minute.ToString()) < 18
+                && int.Parse(currentDate.Hour.ToString())== 0) ? currentDate.AddMonths(-1).Month : currentDate.Month;
+            var year = (int.Parse(currentDate.Month.ToString()) == 1 
+                && int.Parse(currentDate.Day.ToString()) == 1
+                && int.Parse(currentDate.Minute.ToString()) >= 0
+                && int.Parse(currentDate.Minute.ToString()) < 18
+                && int.Parse(currentDate.Hour.ToString()) == 0) ? currentDate.AddYears(-1).Year : currentDate.Year;
+            var day = (int.Parse(currentDate.Minute.ToString()) >= 0 
+                && int.Parse(currentDate.Minute.ToString()) < 18
+                && int.Parse(currentDate.Hour.ToString()) == 0) ? currentDate.AddDays(-1).Day : currentDate.Day;
+            var hour = (int.Parse(currentDate.Minute.ToString()) >= 0 
+                && int.Parse(currentDate.Minute.ToString()) < 18) ? currentDate.AddHours(-1).Hour : currentDate.Hour;
+
+            var url = Constants.GetWeatherRecordsUrl + year + "-" + month + "-" + day + "T"
+                + hour.ToString("00.##") + ":" + currentDate.AddMinutes(-18).Minute.ToString("00.##") + ":00" + "/" + currentDate.Year + "-" + currentDate.Month + "-" + currentDate.Day + "T"
+                + currentDate.Hour.ToString("00.##") + ":" + currentDate.Minute.ToString("00.##") + ":00";
+
+            var json = await client.GetStringAsync(url);
+            JObject jsonResponse = JObject.Parse(json);
+            JArray objResponse = (JArray)jsonResponse["value"];
+
+            var weatherRecord = JsonConvert.DeserializeObject<List<WeatherRecordModel>>(objResponse.ToString());
+            return weatherRecord;
         }
     }
 }

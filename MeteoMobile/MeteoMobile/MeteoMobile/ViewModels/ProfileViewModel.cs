@@ -73,15 +73,16 @@ namespace MeteoMobile.ViewModels
                 return new Command(async () => 
                 {
                     User = await _apiServices.GetMyUserAsync(Settings.AccessToken);
-                    if (User != null) IsSuccess = true; else IsSuccess = false;
-                    if (IsSuccess)
+                    if (User != null) 
                     {
                         FirstName = User.FirstName;
                         LastName = User.LastName;
                         Email = User.Email;
                         Role = User.Role;
                         CreatedAt = User.CreatedAt;
+                        IsSuccess = true;
                     }
+                    else IsSuccess = false;
                 });
             }
         }
