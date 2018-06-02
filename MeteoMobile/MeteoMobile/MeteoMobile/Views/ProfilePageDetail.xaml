@@ -21,19 +21,18 @@
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
-                    <Label Grid.Column="0" Grid.Row="0" Text="Bienvenue"/>
-                    <Label Grid.Column="1" Grid.Row="0" x:Name="nameLabel"/>
-                    
-                    <Label Grid.Column="0" Grid.Row="1" Text="Votre Email :"/>
-                    <Label Grid.Column="1" Grid.Row="1" x:Name="emailLabel" Text="{Binding Email}"/>
+                    <Label Grid.Column="0" Grid.Row="1" Text="Utilisateur :" XAlign="Center" FontSize="Medium"/>
+                    <Label Grid.Column="1" Grid.Row="1" x:Name="nameLabel"  FontSize="Medium" />
 
-                    <Label  Grid.Column="0" Grid.Row="2" Text="Date de la création du compte :"/>
-                    <Label  Grid.Column="1" Grid.Row="2" x:Name="dateCreationLabel" Text="{Binding CreatedAt.DateTime}"/>
+                    <Label Grid.Column="0" Grid.Row="2" Text="Votre Email :" XAlign="Center" FontSize="Small"/>
+                    <Label Grid.Column="1" Grid.Row="2" x:Name="emailLabel" Text="{Binding Email}" FontSize="Small"/>
 
-                    <Label  Grid.Column="0" Grid.Row="3" Text="vous êtes connécté en tant que :"/>
-                    <Label  Grid.Column="1" Grid.Row="3" x:Name="roleLabel" Text="{Binding Role}"/>
+                    <Label  Grid.Column="0" Grid.Row="3" Text="Date de la création du compte :" XAlign="Center" FontSize="Small"/>
+                    <Label  Grid.Column="1" Grid.Row="3" x:Name="dateCreationLabel" Text="{Binding CreatedAt.DateTime}"  FontSize="Small"/>
+
+                    <Label  Grid.Column="0" Grid.Row="4" Text="vous êtes connécté en tant que :" XAlign="Center" FontSize="Small"/>
+                    <Label  Grid.Column="1" Grid.Row="4" x:Name="roleLabel" Text="{Binding Role}"  FontSize="Small"/>
 
                     <Button  Grid.Column="1" Grid.Row="6" Text="Modfier" Clicked="Button_Clicked"/>
                 </Grid>

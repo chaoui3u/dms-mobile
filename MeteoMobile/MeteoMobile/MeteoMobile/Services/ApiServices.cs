@@ -211,21 +211,21 @@ namespace MeteoMobile.Services
             ServicePointManager.ServerCertificateValidationCallback = CertificateValidation.MyRemoteCertificateValidationCallback;
             var month = (int.Parse(currentDate.Day.ToString()) == 1 
                 && int.Parse(currentDate.Minute.ToString()) >= 0 
-                && int.Parse(currentDate.Minute.ToString()) < 18
+                && int.Parse(currentDate.Minute.ToString()) < 20
                 && int.Parse(currentDate.Hour.ToString())== 0) ? currentDate.AddMonths(-1).Month : currentDate.Month;
             var year = (int.Parse(currentDate.Month.ToString()) == 1 
                 && int.Parse(currentDate.Day.ToString()) == 1
                 && int.Parse(currentDate.Minute.ToString()) >= 0
-                && int.Parse(currentDate.Minute.ToString()) < 18
+                && int.Parse(currentDate.Minute.ToString()) < 20
                 && int.Parse(currentDate.Hour.ToString()) == 0) ? currentDate.AddYears(-1).Year : currentDate.Year;
             var day = (int.Parse(currentDate.Minute.ToString()) >= 0 
-                && int.Parse(currentDate.Minute.ToString()) < 18
+                && int.Parse(currentDate.Minute.ToString()) < 20
                 && int.Parse(currentDate.Hour.ToString()) == 0) ? currentDate.AddDays(-1).Day : currentDate.Day;
             var hour = (int.Parse(currentDate.Minute.ToString()) >= 0 
-                && int.Parse(currentDate.Minute.ToString()) < 18) ? currentDate.AddHours(-1).Hour : currentDate.Hour;
+                && int.Parse(currentDate.Minute.ToString()) < 20) ? currentDate.AddHours(-1).Hour : currentDate.Hour;
 
             var url = Constants.GetWeatherRecordsUrl + year + "-" + month + "-" + day + "T"
-                + hour.ToString("00.##") + ":" + currentDate.AddMinutes(-18).Minute.ToString("00.##") + ":00" + "/" + currentDate.Year + "-" + currentDate.Month + "-" + currentDate.Day + "T"
+                + hour.ToString("00.##") + ":" + currentDate.AddMinutes(-20).Minute.ToString("00.##") + ":00" + "/" + currentDate.Year + "-" + currentDate.Month + "-" + currentDate.Day + "T"
                 + currentDate.Hour.ToString("00.##") + ":" + currentDate.Minute.ToString("00.##") + ":00";
 
             var json = await client.GetStringAsync(url);

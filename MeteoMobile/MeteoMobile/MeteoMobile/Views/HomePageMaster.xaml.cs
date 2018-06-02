@@ -24,8 +24,9 @@ namespace MeteoMobile.Views
 
             BindingContext = new HomePageMasterViewModel();
             ListView = MenuItemsListView;
-            if (DateTime.UtcNow >= Settings.AccessTokenExpirationDate)
+            if (DateTime.Now >= Settings.AccessTokenExpirationDate)
                 Application.Current.MainPage = new LoginPage();
+            ocpImage.Source = ImageSource.FromResource("MeteoMobile.Images.ocp_logo.png");
         }
 
         class HomePageMasterViewModel : INotifyPropertyChanged
@@ -36,7 +37,7 @@ namespace MeteoMobile.Views
             {
                 MenuItems = new ObservableCollection<HomePageMenuItem>(new[]
                 {
-                    new HomePageMenuItem { Id = 0, Title = "Home", TargetType=typeof(HomePageDetail) },
+                    new HomePageMenuItem { Id = 0, Title = "Acceuil", TargetType=typeof(HomePageDetail) },
                     new HomePageMenuItem { Id = 1, Title = "Profile", TargetType=typeof(ProfilePageDetail) },
                     new HomePageMenuItem { Id = 2, Title = "Utilisateurs" , TargetType=typeof(UsersPageDetail)},
                     new HomePageMenuItem { Id = 3, Title = "Statistics" , TargetType=typeof(StatisticsTabbedPageDetail)},

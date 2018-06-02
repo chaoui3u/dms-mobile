@@ -24,25 +24,34 @@
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        
                     </Grid.RowDefinitions>
-                    <Label Grid.Column="0" Grid.Row="0" Text="Température :"/>
-                    <Label Grid.Column="1" Grid.Row="0"  Text="{Binding Temperature}"/>
 
-                    <Label Grid.Column="0" Grid.Row="1" Text="Humidité :"/>
-                    <Label Grid.Column="1" Grid.Row="1"  Text="{Binding Humidity}"/>
+                    <Label Grid.Column="0" Grid.Row="1"  Text="Bienvenue " Font="Bold" FontSize="Large" XAlign="Center"/>
+                    <Label Grid.Column="1" Grid.Row="1" x:Name="nameLabel" Font="Bold" FontSize="Large" XAlign="Start"/>
 
-                    <Label  Grid.Column="0" Grid.Row="2" Text="Préssion :"/>
-                    <Label  Grid.Column="1" Grid.Row="2"  Text="{Binding Pressure}"/>
+                    <Label Grid.Column="0" Grid.Row="3" Text="Température :" XAlign="Center"/>
+                    <Label Grid.Column="1" Grid.Row="3"  Text="{Binding TempCelcius}" />
 
-                    <Label  Grid.Column="0" Grid.Row="3" Text="Vitesse du vent :"/>
-                    <Label  Grid.Column="1" Grid.Row="3"  Text="{Binding WindSpeed}"/>
+                    <Label Grid.Column="0" Grid.Row="4" Text="Humidité :" XAlign="Center"/>
+                    <Label Grid.Column="1" Grid.Row="4"  Text="{Binding HumidityPercent}" />
 
-                    <Label  Grid.Column="0" Grid.Row="4" Text="Direction du vent :"/>
-                    <Label  Grid.Column="1" Grid.Row="4"  Text="{Binding WindDegree}"/>
+                    <Label  Grid.Column="0" Grid.Row="5" Text="Préssion :" XAlign="Center"/>
+                    <Label  Grid.Column="1" Grid.Row="5"  Text="{Binding PressurePascal}" />
 
-                    <Label  Grid.Column="0" Grid.Row="5" Text="Temp :"/>
-                    <Label  Grid.Column="1" Grid.Row="5"  Text="{Binding CurrentTime.DateTime}"/>
+                    <Label  Grid.Column="0" Grid.Row="6" Text="Vitesse du vent :" XAlign="Center"/>
+                    <Label  Grid.Column="1" Grid.Row="6"  Text="{Binding WindSpeedMeterPerSec}"/>
 
+                    <Label  Grid.Column="0" Grid.Row="7" Text="Direction du vent :" XAlign="Center"/>
+                    <Label  Grid.Column="1" Grid.Row="7"  Text="{Binding WindDirectionDegree}" />
+
+                    <Label  Grid.Column="0" Grid.Row="8" Text="Date de capture :" XAlign="Center"/>
+                    <Label  Grid.Column="1" Grid.Row="8"  Text="{Binding DateOfDay}" />
+
+                    <Label  Grid.Column="0" Grid.Row="9" Text="Temp de capture:" XAlign="Center"/>
+                    <Label  Grid.Column="1" Grid.Row="9"  Text="{Binding TimeOfDay}" />
                 </Grid>
             </ScrollView>
         </StackLayout>

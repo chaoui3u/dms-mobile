@@ -37,6 +37,8 @@ namespace MeteoMobile.Views
                 rolePicker.SelectedItem = Constants.MyUser.Role;
                 password.Text = Settings.Password;
                 confirmPassword.Text = Settings.Password;
+                if (Constants.MyUser.Role == "Staff")
+                    rolePicker.IsVisible = false;
             }
         }
 

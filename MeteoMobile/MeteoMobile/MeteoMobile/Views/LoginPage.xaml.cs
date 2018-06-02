@@ -14,9 +14,11 @@ namespace MeteoMobile.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class LoginPage : ContentPage
 	{
-		public LoginPage ()
-		{
-			InitializeComponent ();
+        public LoginPage()
+        {
+            InitializeComponent();
+            ocpImage.Source = ImageSource.FromResource("MeteoMobile.Images.ocp_logo.png");
+            
             login.Text = "admin@test2.local";
             pass.Text = "Password123!";
 		}

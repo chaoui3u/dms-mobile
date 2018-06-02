@@ -21,12 +21,13 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="10"/>
           </Grid.RowDefinitions>
+          <Image Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="2" x:Name="ocpImage" Aspect="AspectFit"/>
           <Label
               Grid.Column="1"
               Grid.Row="2"
               Text="Météo Jorf Lasfar"
               TextColor="Black"
-              Style="{DynamicResource SubtitleStyle}"/>
+              Style="{DynamicResource SubtitleStyle}" XAlign="Center" FontAttributes="Bold"/>
         </Grid>
       </ListView.Header>
       <ListView.ItemTemplate>
@@ -36,7 +37,7 @@
               <Label VerticalOptions="FillAndExpand" 
                     VerticalTextAlignment="Center" 
                     Text="{Binding Title}" 
-                    FontSize="24"/>
+                    FontSize="24" />
             </StackLayout>
           </ViewCell>
         </DataTemplate>

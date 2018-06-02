@@ -8,13 +8,29 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout Orientation="Vertical">
-            <Label Text="Utilisateur"/>
-            <Entry x:Name="login" Text="{Binding Username}"/>
-            <Label Text="Mot de Passe"/>
-            <Entry x:Name="pass"  Text="{Binding Password}"
-                   IsPassword="True"/>
-            <Button Command="{Binding LoginCommand}"
-                    Text="Valider" Clicked="Button_Clicked"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+
+                </Grid.RowDefinitions>
+                <Image Grid.Row="0" Grid.RowSpan="3" x:Name="ocpImage" Aspect="AspectFit"/>
+                <Label Text="Utilisateur" Grid.Row="4" FontSize="Medium" XAlign="Center" TextColor="ForestGreen"/>
+                <Entry x:Name="login" Text="{Binding Username}" Grid.Row="5" />
+                <Label Text="Mot de Passe" Grid.Row="6" FontSize="Medium" XAlign="Center" TextColor="ForestGreen" />
+                <Entry x:Name="pass"  Text="{Binding Password}"
+                   IsPassword="True" Grid.Row="7" />
+                <Button Command="{Binding LoginCommand}"
+                    Text="Valider" Clicked="Button_Clicked" Grid.Row="8"/>
+            </Grid>
+           
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
