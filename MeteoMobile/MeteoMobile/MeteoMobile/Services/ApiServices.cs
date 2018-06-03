@@ -29,29 +29,42 @@ namespace MeteoMobile.Services
 
             //validating certificate to use https
             ServicePointManager.ServerCertificateValidationCallback = CertificateValidation.MyRemoteCertificateValidationCallback;
-
-            using (var client = new HttpClient())
-            {
-                var response = await client.SendAsync(request);
-
-                var content = await response.Content.ReadAsStringAsync();
-
-                JObject jwtDynamic = JsonConvert.DeserializeObject<dynamic>(content);
+            DateTime accessTokenExpiration;
+            string content;
+            string accessToken;
+                using (var client = new HttpClient())
+                {
+                 HttpResponseMessage response;
+                try
+                {
+                    response = await client.SendAsync(request);
                 
-                var accessTokenExpiration = DateTime.Now.AddSeconds(jwtDynamic.Value<int>("expires_in"));
-                var accessToken = jwtDynamic.Value<string>("access_token");
+                     content = await response.Content.ReadAsStringAsync();
 
+                    JObject jwtDynamic = JsonConvert.DeserializeObject<dynamic>(content);
+
+                     accessTokenExpiration = DateTime.Now.AddSeconds(jwtDynamic.Value<int>("expires_in"));
+                    accessToken = jwtDynamic.Value<string>("access_token");
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine("Exception Message : " + e.Message
+                    + " Instance that caused the current message : "
+                    + e.InnerException + " Stack of Exception :"
+                    + e.StackTrace);
+                    return null;
+                }
                 //saving access token in preferences
                 Settings.AccessTokenExpirationDate = accessTokenExpiration;
 
-                System.Diagnostics.Debug.WriteLine(response.StatusCode + " / " + response.ReasonPhrase + " / " + response.RequestMessage);
-                System.Diagnostics.Debug.WriteLine(accessTokenExpiration);
+                    System.Diagnostics.Debug.WriteLine(response.StatusCode + " / " + response.ReasonPhrase + " / " + response.RequestMessage);
+                    System.Diagnostics.Debug.WriteLine(accessTokenExpiration);
 
-                System.Diagnostics.Debug.WriteLine(content);
+                    System.Diagnostics.Debug.WriteLine(content);
 
-                return accessToken;
-            }
-
+                    return accessToken;
+                }
+           
         }
 
         public async Task<bool> SignUpAsync(string accessToken,string firstName, string lastName,
@@ -80,10 +93,19 @@ namespace MeteoMobile.Services
             
             //validating certificate to use https
             ServicePointManager.ServerCertificateValidationCallback = CertificateValidation.MyRemoteCertificateValidationCallback;
-
-            var response = await client.PostAsync(Constants.SignUpUrl, content);
-
-            System.Diagnostics.Debug.WriteLine(response.StatusCode + " / " + response.ReasonPhrase + " / " + response.RequestMessage);
+            HttpResponseMessage response;
+            try
+            {
+                 response = await client.PostAsync(Constants.SignUpUrl, content);
+             }catch(Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine("Exception Message : " + e.Message
+                    + " Instance that caused the current message : "
+                    + e.InnerException + " Stack of Exception :"
+                    + e.StackTrace);
+                    return false;
+                }
+    System.Diagnostics.Debug.WriteLine(response.StatusCode + " / " + response.ReasonPhrase + " / " + response.RequestMessage);
             return response.IsSuccessStatusCode;
         }
 
@@ -114,13 +136,22 @@ namespace MeteoMobile.Services
             //validating certificate to use https
             ServicePointManager.ServerCertificateValidationCallback = CertificateValidation.MyRemoteCertificateValidationCallback;
             HttpResponseMessage response;
-
-            if (Constants.MyUser.Role == "Admin")
-             response = await client.PutAsync(Constants.GetUsersUrl+userId, content);
-            else
-             response = await client.PutAsync(Constants.GetMyUserUrl, content);
-            System.Diagnostics.Debug.WriteLine(response.StatusCode + " / " + response.ReasonPhrase+" / "+response.RequestMessage);
-
+            try
+            {
+                if (Constants.MyUser.Role == "Administrateur")
+                    response = await client.PutAsync(Constants.GetUsersUrl + userId, content);
+                else
+                    response = await client.PutAsync(Constants.GetMyUserUrl, content);
+                System.Diagnostics.Debug.WriteLine(response.StatusCode + " / " + response.ReasonPhrase + " / " + response.RequestMessage);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception Message : " + e.Message
+                    + " Instance that caused the current message : "
+                    + e.InnerException + " Stack of Exception :"
+                    + e.StackTrace);
+                return false;
+            }
             return response.IsSuccessStatusCode;
         }
 
@@ -131,17 +162,27 @@ namespace MeteoMobile.Services
                 new AuthenticationHeaderValue("Bearer", accessToken);
             //validating certificate to use https
             ServicePointManager.ServerCertificateValidationCallback = CertificateValidation.MyRemoteCertificateValidationCallback;
+            List<UserModel> users;
+            try
+            {
+                var json = await client.GetStringAsync(Constants.GetUsersUrl);
 
-            var json = await client.GetStringAsync(Constants.GetUsersUrl);
+                JObject jsonResponse = JObject.Parse(json);
+                JArray objResponse = (JArray)jsonResponse["value"];
+                //IList<UserModel> user = objResponse.ToObject<IList<UserModel>>();
 
-            JObject jsonResponse = JObject.Parse(json);
-            JArray objResponse = (JArray)jsonResponse["value"];
-            //IList<UserModel> user = objResponse.ToObject<IList<UserModel>>();
+                 users = JsonConvert.DeserializeObject<List<UserModel>>(objResponse.ToString());
 
-            var users = JsonConvert.DeserializeObject<List<UserModel>>(objResponse.ToString());
-
-            //var users = JsonConvert.DeserializeObject<List<UserModel>>(json);
-
+                //var users = JsonConvert.DeserializeObject<List<UserModel>>(json);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception Message : " + e.Message
+                    + " Instance that caused the current message : "
+                    + e.InnerException + " Stack of Exception :"
+                    + e.StackTrace);
+                return null;
+            }
             return users;
 
         }
@@ -152,26 +193,47 @@ namespace MeteoMobile.Services
                 new AuthenticationHeaderValue("Bearer", accessToken);
             //validating certificate to use https
             ServicePointManager.ServerCertificateValidationCallback = CertificateValidation.MyRemoteCertificateValidationCallback;
+            HttpResponseMessage response;
+            try
+            {
+                 response = await client.DeleteAsync(Constants.GetUsersUrl + userId);
 
-            var response = await client.DeleteAsync(Constants.GetUsersUrl + userId);
-
-            System.Diagnostics.Debug.WriteLine(response.StatusCode + " / " + response.ReasonPhrase + " / " + response.RequestMessage);
-
+                System.Diagnostics.Debug.WriteLine(response.StatusCode + " / " + response.ReasonPhrase + " / " + response.RequestMessage);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception Message : " + e.Message
+                    + " Instance that caused the current message : "
+                    + e.InnerException + " Stack of Exception :"
+                    + e.StackTrace);
+                return false;
+            }
             return response.IsSuccessStatusCode;
         }
 
-            public async Task<UserModel> GetMyUserAsync(string accessToken)
+        public async Task<UserModel> GetMyUserAsync(string accessToken)
         {
             var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Bearer", accessToken);
             //validating certificate to use https
             ServicePointManager.ServerCertificateValidationCallback = CertificateValidation.MyRemoteCertificateValidationCallback;
+            UserModel user;
+            try
+            {
+                var json = await client.GetStringAsync(Constants.GetMyUserUrl);
+                JObject jsonResponse = JObject.Parse(json);
 
-            var json = await client.GetStringAsync(Constants.GetMyUserUrl);
-            JObject jsonResponse = JObject.Parse(json);
-
-            var user = JsonConvert.DeserializeObject<UserModel>(jsonResponse.ToString());
+                 user = JsonConvert.DeserializeObject<UserModel>(jsonResponse.ToString());
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception Message : " + e.Message
+                    + " Instance that caused the current message : "
+                    + e.InnerException + " Stack of Exception :"
+                    + e.StackTrace);
+                return null;
+            }
             return user;
         }
 
@@ -191,13 +253,24 @@ namespace MeteoMobile.Services
 
             var url = Constants.GetWeatherRecordsUrl + dateTime.Year+"-"+dateTime.Month+"-"+dateTime.Day+"T00:10:00" 
                 + "/" + year + "-" + month  + "-" + dateTime.AddDays(1).Day + "T00:00:00";
-            var json = await client.GetStringAsync(url);
-          
-            JObject jsonResponse = JObject.Parse(json);
-            JArray objResponse = (JArray)jsonResponse["value"];
+            List<WeatherRecordModel> weatherRecords;
+            try
+            {
+                var json = await client.GetStringAsync(url);
 
-            var weatherRecords = JsonConvert.DeserializeObject<List<WeatherRecordModel>>(objResponse.ToString());
+                JObject jsonResponse = JObject.Parse(json);
+                JArray objResponse = (JArray)jsonResponse["value"];
 
+                 weatherRecords = JsonConvert.DeserializeObject<List<WeatherRecordModel>>(objResponse.ToString());
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception Message : " + e.Message
+                    + " Instance that caused the current message : "
+                    + e.InnerException + " Stack of Exception :"
+                    + e.StackTrace);
+                return null;
+            }
             return weatherRecords;
         }
 
@@ -227,12 +300,23 @@ namespace MeteoMobile.Services
             var url = Constants.GetWeatherRecordsUrl + year + "-" + month + "-" + day + "T"
                 + hour.ToString("00.##") + ":" + currentDate.AddMinutes(-20).Minute.ToString("00.##") + ":00" + "/" + currentDate.Year + "-" + currentDate.Month + "-" + currentDate.Day + "T"
                 + currentDate.Hour.ToString("00.##") + ":" + currentDate.Minute.ToString("00.##") + ":00";
+            List<WeatherRecordModel> weatherRecord;
+            try
+            {
+                var json = await client.GetStringAsync(url);
+                JObject jsonResponse = JObject.Parse(json);
+                JArray objResponse = (JArray)jsonResponse["value"];
 
-            var json = await client.GetStringAsync(url);
-            JObject jsonResponse = JObject.Parse(json);
-            JArray objResponse = (JArray)jsonResponse["value"];
-
-            var weatherRecord = JsonConvert.DeserializeObject<List<WeatherRecordModel>>(objResponse.ToString());
+                weatherRecord = JsonConvert.DeserializeObject<List<WeatherRecordModel>>(objResponse.ToString());
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception Message : "+e.Message
+                    +" Instance that caused the current message : "
+                    +e.InnerException+" Stack of Exception :"
+                    +e.StackTrace);
+                return null;
+            }
             return weatherRecord;
         }
     }

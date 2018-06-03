@@ -20,12 +20,12 @@ namespace MeteoMobile.Views
 
             
 		}
-        protected async override void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
             vm = (ProfileViewModel)this.BindingContext;
             vm.GetCurrentUserCommand.Execute(null);
-            await PutTaskDelay(200);
+            //await PutTaskDelay(400);
             nameLabel.Text = vm.FirstName + " " + vm.LastName;
         }
 

@@ -59,11 +59,16 @@ namespace MeteoMobile.Views
        
         private async void Delete_Clicked(object sender, EventArgs e)
         {
-            Constants.ThisUser = ((MenuItem)sender).CommandParameter as UserModel;
-            await PutTaskDelay(5000);
-            var vm = (UsersViewModel)this.BindingContext;
-            DisplayConfirmAlert(vm.IsSuccess);
-            Constants.ThisUser = null;
+            var answer = await DisplayAlert("Question?", "Voulez vous vraiment supprimer cette utilisateur ?", "Oui", "Non");
+            if (answer)
+            {
+                Constants.ThisUser = ((MenuItem)sender).CommandParameter as UserModel;
+                var vm = (UsersViewModel)this.BindingContext;
+                vm.DeleteUserCommand.Execute(null);
+                await PutTaskDelay(3000);
+                DisplayConfirmAlert(vm.IsSuccess);
+                Constants.ThisUser = null;
+            }
         }
 
         private async void SignUpToolBar_Activated(object sender, EventArgs e)

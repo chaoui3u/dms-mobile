@@ -19,7 +19,7 @@ namespace MeteoMobile.Views
         public SignUpPage()
         {
             InitializeComponent();
-            Title = "enregistrer un utilisateur";
+            Title = "Enregistrer un utilisateur";
         }
 
 

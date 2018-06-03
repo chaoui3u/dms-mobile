@@ -28,7 +28,7 @@
                 <ViewCell>
                     <ViewCell.ContextActions>
                         <MenuItem Text="Modifier" Clicked="Modify_Clicked" CommandParameter="{Binding .}"/>
-                        <MenuItem Text="Supprimer" Clicked="Delete_Clicked" CommandParameter="{Binding .}" Command="{Binding Path=BindingContext.DeleteUserCommand, Source={x:Reference MyListView}}" IsDestructive="True"/>
+                        <MenuItem Text="Supprimer" Clicked="Delete_Clicked" CommandParameter="{Binding .}"  IsDestructive="True"/>
                     </ViewCell.ContextActions>
                     <StackLayout>
                         <Grid>

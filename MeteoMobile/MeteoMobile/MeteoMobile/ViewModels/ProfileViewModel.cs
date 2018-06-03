@@ -70,9 +70,9 @@ namespace MeteoMobile.ViewModels
         {
             get
             {
-                return new Command(async () => 
+                return new Command(() => 
                 {
-                    User = await _apiServices.GetMyUserAsync(Settings.AccessToken);
+                    User = Constants.MyUser;
                     if (User != null) 
                     {
                         FirstName = User.FirstName;

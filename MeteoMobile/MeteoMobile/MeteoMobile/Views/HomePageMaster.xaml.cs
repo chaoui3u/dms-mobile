@@ -40,10 +40,10 @@ namespace MeteoMobile.Views
                     new HomePageMenuItem { Id = 0, Title = "Acceuil", TargetType=typeof(HomePageDetail) },
                     new HomePageMenuItem { Id = 1, Title = "Profile", TargetType=typeof(ProfilePageDetail) },
                     new HomePageMenuItem { Id = 2, Title = "Utilisateurs" , TargetType=typeof(UsersPageDetail)},
-                    new HomePageMenuItem { Id = 3, Title = "Statistics" , TargetType=typeof(StatisticsTabbedPageDetail)},
+                    new HomePageMenuItem { Id = 3, Title = "Graphes" , TargetType=typeof(StatisticsTabbedPageDetail)},
                     new HomePageMenuItem { Id = 4, Title = "Se déconnecter" , TargetType=typeof(LogoutPage)},
                 });
-                if(Constants.MyUser.Role != "Admin")
+                if(Constants.MyUser.Role != "Administrateur")
                      MenuItems.RemoveAt(2);
             }
             

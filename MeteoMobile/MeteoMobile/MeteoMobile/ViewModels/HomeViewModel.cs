@@ -124,25 +124,40 @@ namespace MeteoMobile.ViewModels
                 return new Command(async () => 
                 {
                     WeatherRecord = await _apiServices.GetActualWeatherRecord(Settings.AccessToken, DateTimeOffset.Now);
-                    if (WeatherRecord != null)
+                    if (WeatherRecord != null && WeatherRecord.Count >= 1)
                     {
-                        Temperature = WeatherRecord[0].MainData.Temp;
-                        Pressure = WeatherRecord[0].MainData.Pressure;
-                        Humidity = WeatherRecord[0].MainData.Humidity;
-                        WindSpeed = WeatherRecord[0].Wind.Speed;
-                        WindDegree = WeatherRecord[0].Wind.Degree;
-                        CurrentTime = WeatherRecord[0].CurrentTime;
-                        TempCelcius = string.Format("{0} °C", Temperature);
-                        PressurePascal = string.Format("{0} hpa", Pressure);
-                        HumidityPercent = string.Format("{0} %", Humidity);
-                        WindSpeedMeterPerSec = string.Format("{0} m/s", WindSpeed);
-                        WindDirectionDegree = string.Format("{0} °", WindDegree);
-                        DateOfDay = string.Format("{0}/{1}/{2}", CurrentTime.Date.Day.ToString("00.##"),CurrentTime.Date.Month.ToString("00.##"),CurrentTime.Date.Year);
-                        TimeOfDay = string.Format("{0}:{1}:{2}", 
-                            CurrentTime.TimeOfDay.Hours.ToString("00.##"),
-                            CurrentTime.TimeOfDay.Minutes.ToString("00.##"),
-                            CurrentTime.TimeOfDay.Seconds.ToString("00.##"));
-                        IsSuccess = true;
+                        try
+                        {
+                            Temperature = WeatherRecord[0].MainData.Temp;
+                            Pressure = WeatherRecord[0].MainData.Pressure;
+                            Humidity = WeatherRecord[0].MainData.Humidity;
+                            WindSpeed = WeatherRecord[0].Wind.Speed;
+                            WindDegree = WeatherRecord[0].Wind.Degree;
+                            CurrentTime = WeatherRecord[0].CurrentTime;
+                            TempCelcius = string.Format("{0} °C", Temperature);
+                            PressurePascal = string.Format("{0} hpa", Pressure);
+                            HumidityPercent = string.Format("{0} %", Humidity);
+                            WindSpeedMeterPerSec = string.Format("{0} m/s", WindSpeed);
+                            WindDirectionDegree = string.Format("{0} °", WindDegree);
+                            DateOfDay = string.Format("{0}/{1}/{2}",
+                                CurrentTime.Date.Day.ToString("00.##"),
+                                CurrentTime.Date.Month.ToString("00.##"),
+                                CurrentTime.Date.Year);
+                            TimeOfDay = string.Format("{0}:{1}:{2}",
+                                CurrentTime.TimeOfDay.Hours.ToString("00.##"),
+                                CurrentTime.TimeOfDay.Minutes.ToString("00.##"),
+                                CurrentTime.TimeOfDay.Seconds.ToString("00.##"));
+                            IsSuccess = true;
+                        }
+                        catch (Exception e)
+                        {
+                            System.Diagnostics.Debug.WriteLine("Exception Message : " + e.Message
+                            + " Instance that caused the current message : "
+                            + e.InnerException + " Stack of Exception :"
+                            + e.StackTrace);
+                            IsSuccess = false;
+                        }
+                        
                     }
                     else IsSuccess = false;
                 });

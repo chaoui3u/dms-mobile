@@ -62,7 +62,7 @@ namespace MeteoMobile.ViewModels
                 return new Command(async () => 
                 {
                     IsBusy = true;
-                    await PutTaskDelay(2000);
+                    //await PutTaskDelay(2000);
                     IsSuccess= await _apiServices.DeleteUserAsync(Settings.AccessToken, Constants.ThisUser.Id);
                     if (IsSuccess)
                     {

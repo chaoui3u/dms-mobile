@@ -35,7 +35,18 @@ namespace MeteoMobile.Views
                 Constants.MyUser = await new ApiServices().GetMyUserAsync(Settings.AccessToken);
                 if(Constants.MyUser == null)
                     await PutTaskDelay(2000);
-                await Navigation.PushModalAsync(new HomePage());
+                try
+                {
+                    await Navigation.PushModalAsync(new HomePage());
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Exception Message : " + ex.Message
+                        + " Instance that caused the current message : "
+                        + ex.InnerException + " Stack of Exception :"
+                        + ex.StackTrace);
+                    await DisplayAlert("Echec", "Veuillez Recommencer", "Ok");
+                }
             }
             else
                 await DisplayAlert("Echec", "Veuillez Recommencer", "Ok");
