@@ -54,7 +54,10 @@ namespace MeteoMobile.Views
               || string.IsNullOrEmpty(lastName.Text)
               || string.IsNullOrEmpty(email.Text)))
             {
-                if (!string.IsNullOrEmpty(password.Text) && string.IsNullOrEmpty(confirmPassword.Text))
+                if (!string.IsNullOrEmpty(password.Text) 
+                    && string.IsNullOrEmpty(confirmPassword.Text) 
+                    || (!string.IsNullOrEmpty(password.Text) && (password.Text != confirmPassword.Text))
+                    || (!string.IsNullOrEmpty(confirmPassword.Text) && (password.Text != confirmPassword.Text)))
                     {
                        await DisplayAlert("erreur", "veuillez confirmer le mot de passe","Ok");
                         return;

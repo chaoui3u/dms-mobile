@@ -34,7 +34,8 @@ namespace MeteoMobile.Views
                || string.IsNullOrEmpty(confirmPassword.Text)
                || string.IsNullOrEmpty(firstName.Text)
                || string.IsNullOrEmpty(lastName.Text)
-               || string.IsNullOrEmpty(email.Text)))
+               || string.IsNullOrEmpty(email.Text))
+               && (password.Text == confirmPassword.Text))
             {
                 var vm = (SignUpViewModel)this.BindingContext;
                 vm.SignUpCommand.Execute(null);

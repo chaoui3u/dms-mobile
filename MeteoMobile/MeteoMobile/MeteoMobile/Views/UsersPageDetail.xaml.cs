@@ -65,7 +65,7 @@ namespace MeteoMobile.Views
                 Constants.ThisUser = ((MenuItem)sender).CommandParameter as UserModel;
                 var vm = (UsersViewModel)this.BindingContext;
                 vm.DeleteUserCommand.Execute(null);
-                await PutTaskDelay(3000);
+                await PutTaskDelay(5000);
                 DisplayConfirmAlert(vm.IsSuccess);
                 Constants.ThisUser = null;
             }
