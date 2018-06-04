@@ -63,4 +63,63 @@
             </ScrollView>
         </ContentPage.Content>
     </ContentPage>
+
+    <ContentPage Title="Détails">
+        <StackLayout>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Label Text="Date et Heure" Grid.Column="0" FontSize="Micro" />
+                <Label Text="Temp (°C)" Grid.Column="1" FontSize="Micro" TextColor="Red" />
+                <Label Text="Humidité (%)" Grid.Column="2" FontSize="Micro"  TextColor="DarkBlue"/>
+                <Label Text="Préssion (Hpa)" Grid.Column="3" FontSize="Micro" TextColor="DarkGreen"/>
+                <Label Text="Vent (m/s)" Grid.Column="4" FontSize="Micro" TextColor="Orange"/>
+                <Label Text="Vent (°)" Grid.Column="5" FontSize="Micro" TextColor="Brown"/>
+            </Grid>
+            <ListView x:Name="weatherRecordListView"
+            ItemsSource="{Binding WeatherRecords}"
+            HasUnevenRows="True"
+            CachingStrategy="RecycleElement"
+           ItemTapped="weatherRecordListView_ItemTapped" >
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                 
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0"   Text="{Binding CurrentTime.DateTime}" TextColor="Black" FontSize="Micro"/>
+                                <Label Grid.Row="0" Grid.Column="1"   Text="{Binding MainData.Temp}" TextColor="Red" FontSize="Micro" XAlign="Center"/>
+                                <Label Grid.Row="0" Grid.Column="2"  Text="{Binding MainData.Humidity}" TextColor="DarkBlue" FontSize="Micro" XAlign="Center"/>
+                                <Label Grid.Row="0" Grid.Column="3"  Text="{Binding MainData.Pressure}" TextColor="DarkGreen" FontSize="Micro" XAlign="Center"/>
+                                <Label Grid.Row="0" Grid.Column="4"  Text="{Binding Wind.Speed}" TextColor="Orange" FontSize="Micro" XAlign="Center"/>
+                                <Label Grid.Row="0" Grid.Column="5"  Text="{Binding Wind.Degree}" TextColor="Brown" FontSize="Micro"/>
+                            </Grid>
+                       
+                     </ViewCell>
+                  </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage>
 </TabbedPage>

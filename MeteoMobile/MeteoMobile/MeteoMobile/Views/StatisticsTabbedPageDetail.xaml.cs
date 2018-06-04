@@ -77,5 +77,17 @@ namespace MeteoMobile.Views
                 picker.Focus();
             });
         }
+
+        private void weatherRecordListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            var wd = e.Item as WeatherRecordModel;
+            DisplayAlert("Details de la capture",
+                "Date et heure :"+wd.CurrentTime.DateTime
+                +"\nTempérature :"+ wd.MainData.Temp +" °C"
+                +"\nHumidité :"+wd.MainData.Humidity + " %"
+                +"\nPréssion :"+wd.MainData.Pressure+ " Hpa"
+                +"\nVitesse du vent :"+wd.Wind.Speed+ " °"
+                +"\nDirection du vent :"+wd.Wind.Degree+ " m/s","Ok");
+        }
     }
 }

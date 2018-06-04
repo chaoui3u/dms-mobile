@@ -60,7 +60,8 @@ namespace MeteoMobile.ViewModels
             {
                 return new Command(async () =>
                 {
-                    if(Constants.ThisUser != null)
+                    if (Password == "") Password = null;
+                    if (Constants.ThisUser != null)
                      IsSuccess = await _apiServices.ModifyUserAsync(Settings.AccessToken, 
                         Constants.ThisUser.Id,FirstName,
                         LastName, Password, Email, Role);

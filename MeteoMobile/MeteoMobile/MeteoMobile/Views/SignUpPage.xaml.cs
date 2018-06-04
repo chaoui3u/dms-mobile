@@ -1,4 +1,5 @@
-﻿using MeteoMobile.Helpers;
+﻿using MeteoMobile.Behaviors;
+using MeteoMobile.Helpers;
 using MeteoMobile.Services;
 using MeteoMobile.ViewModels;
 using System;
@@ -20,15 +21,32 @@ namespace MeteoMobile.Views
         {
             InitializeComponent();
             Title = "Enregistrer un utilisateur";
+            rolePicker.SelectedItem = rolePicker.Items.FirstOrDefault();
         }
 
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            await PutTaskDelay(5000);
-            var vm = (SignUpViewModel)this.BindingContext;
-            DisplayConfirmAlert(vm.IsSuccess);
-            await App.Current.MainPage.Navigation.PopModalAsync();
+           
+            if (password.TextColor != Color.Red
+                 && confirmPassword.TextColor != Color.Red
+                 && email.TextColor != Color.Red && !(string.IsNullOrEmpty(password.Text)
+               || string.IsNullOrEmpty(confirmPassword.Text)
+               || string.IsNullOrEmpty(firstName.Text)
+               || string.IsNullOrEmpty(lastName.Text)
+               || string.IsNullOrEmpty(email.Text)))
+            {
+                var vm = (SignUpViewModel)this.BindingContext;
+                vm.SignUpCommand.Execute(null);
+                await PutTaskDelay(5000);
+                DisplayConfirmAlert(vm.IsSuccess);
+                await App.Current.MainPage.Navigation.PopModalAsync();
+            }else
+            {
+               await DisplayAlert("Erreur", "Corrigez les entrer en rouge," +
+                   " et ne laissez aucun champ vide.", "Ok");
+            }
+
         }
 
         public void DisplayConfirmAlert(bool result)
@@ -43,5 +61,6 @@ namespace MeteoMobile.Views
         {
             await Task.Delay(delay);
         }
+
     }
 }

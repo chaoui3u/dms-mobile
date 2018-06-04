@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ViewModels="clr-namespace:MeteoMobile.ViewModels"
+             xmlns:Behaviors="clr-namespace:MeteoMobile.Behaviors"
              x:Class="MeteoMobile.Views.SignUpPage">
     <ContentPage.BindingContext>
         <ViewModels:SignUpViewModel/>
@@ -27,15 +28,36 @@
                         <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                     <Label  Grid.Row="0"  Text="Nom : " XAlign="Center"  />
-                    <Entry  x:Name="firstName"  Grid.Row="1" Text="{Binding FirstName}" />
+                    <Entry  x:Name="firstName"  Grid.Row="1" Text="{Binding FirstName}" >
+                        <Entry.Behaviors>
+                            <Behaviors:MaxLengthValidatorBehavior MaxLength="10"/>
+                        </Entry.Behaviors>
+                    </Entry>
                     <Label   Grid.Row="2" Text="Prénom : " XAlign="Center"  />
-                    <Entry  x:Name="lastName" Grid.Row="3" Text="{Binding LastName}" />
+                    <Entry  x:Name="lastName" Grid.Row="3" Text="{Binding LastName}" >
+                        <Entry.Behaviors>
+                            <Behaviors:MaxLengthValidatorBehavior MaxLength="10"/>
+                        </Entry.Behaviors>
+                    </Entry>
                     <Label Grid.Row="4" Text="Mot de passe : " XAlign="Center"  />
-                    <Entry x:Name="password"  Grid.Row="5" Text="{Binding Password}"  IsPassword="True" />
+                    <Entry x:Name="password"  Grid.Row="5" Text="{Binding Password}"  IsPassword="True" >
+                        <Entry.Behaviors>
+                            <Behaviors:PasswordValidationBehavior/>
+                        </Entry.Behaviors>
+                    </Entry>
                     <Label  Grid.Row="6" Text="Confirmation du mot de passe : " XAlign="Center"  />
-                    <Entry x:Name="confirmPassword" Grid.Row="7" Text="{Binding ConfirmPassword}" IsPassword="True"/>
+                    <Entry x:Name="confirmPassword" Grid.Row="7" Text="{Binding ConfirmPassword}" IsPassword="True">
+                        <Entry.Behaviors>
+                            <Behaviors:PasswordValidationBehavior/>
+                            <Behaviors:CompareValidationBehavior BindingContext="{x:Reference password}" Text="{Binding Text}"/>
+                        </Entry.Behaviors>
+                    </Entry>
                     <Label  Grid.Row="8" Text="Email : " XAlign="Center"  />
-                    <Entry x:Name="email" Grid.Row="9" Text="{Binding Email}" />
+                    <Entry x:Name="email" Grid.Row="9" Text="{Binding Email}" >
+                        <Entry.Behaviors>
+                            <Behaviors:EmailValidatorBehavior/>
+                        </Entry.Behaviors>
+                    </Entry>
                     <Label  Grid.Row="10" Text="Role : " XAlign="Center"  />
                 <Picker Grid.Row="11" x:Name="rolePicker" Title="Selectionner un role"
                         SelectedItem="{Binding Role}" >
@@ -45,7 +67,7 @@
                     </Picker.Items>
                 </Picker>
 
-                <Button Grid.Row="12"  Command="{Binding SignUpCommand} " Text="Enregistrer" Clicked="Button_Clicked"/>
+                <Button Grid.Row="12"  Text="Enregistrer" Clicked="Button_Clicked"/>
             </Grid>
             </ScrollView>
         </StackLayout>
