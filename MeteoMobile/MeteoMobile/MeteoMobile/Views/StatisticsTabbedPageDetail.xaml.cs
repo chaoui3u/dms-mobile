@@ -31,10 +31,11 @@ namespace MeteoMobile.Views
         {
            
             picker.MaximumDate = DateTimeOffset.Now.Date;
-            Device.BeginInvokeOnMainThread(() => 
+            Device.BeginInvokeOnMainThread(() =>
             {
                 picker.Focus();
             });
+            picker.IsEnabled = true;
         }
 
         async Task PutTaskDelay(int delay)
@@ -44,6 +45,12 @@ namespace MeteoMobile.Views
 
         private async void DatePicker_DateSelected(object sender, DateChangedEventArgs e)
         {
+             
+            indicator.IsRunning = true;
+            indicator.IsVisible = true;
+         
+
+
             vm.DateTimeChosen = e.NewDate;
             vm.GetWeatherRecordsCommand.Execute(null);
              await PutTaskDelay(2000);
@@ -51,7 +58,9 @@ namespace MeteoMobile.Views
             if (!vm.IsSuccess || weatherRecords.Count() < 18)
             {
                 await DisplayAlert("Erreur 404", "Pas assez de valeur pour faire la moyenne de 3H.", "ok");
-            
+                indicator.IsRunning = false;
+                indicator.IsVisible = false;
+
             }
             else
             {
@@ -65,12 +74,16 @@ namespace MeteoMobile.Views
                 windChart.Chart = new LineChart { Entries = charts.WindSpeed(weatherRecords.Count()) };
                 humidityChart.Chart = new BarChart { Entries = charts.Humidity(weatherRecords.Count()) };
                 pressureChart.Chart = new PointChart { Entries = charts.Pressure(weatherRecords.Count()) };
-                tempraturePage.IsBusy = false;
+
+                indicator.IsRunning = false;
+                indicator.IsVisible = false;
+                indicator.IsEnabled = false;
             }
         }
 
         private void ToolPicker_Activated(object sender, EventArgs e)
         {
+            picker.IsEnabled = true;
             picker.MaximumDate = DateTimeOffset.Now.Date;
             Device.BeginInvokeOnMainThread(() =>
             {

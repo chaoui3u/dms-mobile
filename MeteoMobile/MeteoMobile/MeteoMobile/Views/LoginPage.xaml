@@ -8,6 +8,9 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout Orientation="Vertical">
+            <AbsoluteLayout>
+                <ActivityIndicator IsVisible="False"/>
+            </AbsoluteLayout>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
@@ -23,12 +26,14 @@
                 </Grid.RowDefinitions>
                 <Image Grid.Row="0" Grid.RowSpan="3" x:Name="ocpImage" Aspect="AspectFit"/>
                 <Label Text="Météo Jorf Lasfar" Grid.Row="3" FontSize="Large" XAlign="Center" TextColor="Black" FontAttributes="Bold"/>
-                <Label Text="Utilisateur" Grid.Row="4" FontSize="Medium" XAlign="Center" TextColor="ForestGreen"/>
+                <ActivityIndicator Grid.Row="3" VerticalOptions="End" HorizontalOptions="Center" x:Name="indicator" IsRunning="False" 
+                                   IsEnabled="True" IsVisible="False" Color="ForestGreen" BackgroundColor="Transparent"/>
+                 <Label Text="Utilisateur" Grid.Row="4" FontSize="Medium" XAlign="Center" TextColor="ForestGreen"/>
                 <Entry x:Name="login" Text="{Binding Username}" Grid.Row="5" />
                 <Label Text="Mot de Passe" Grid.Row="6" FontSize="Medium" XAlign="Center" TextColor="ForestGreen" />
                 <Entry x:Name="pass"  Text="{Binding Password}"
                    IsPassword="True" Grid.Row="7" />
-                <Button Command="{Binding LoginCommand}"
+                <Button x:Name="myButton" Command="{Binding LoginCommand}"
                     Text="Valider" Clicked="Button_Clicked" Grid.Row="8"/>
             </Grid>
            

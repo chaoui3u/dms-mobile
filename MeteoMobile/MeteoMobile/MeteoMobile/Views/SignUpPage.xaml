@@ -39,6 +39,8 @@
                             <Behaviors:MaxLengthValidatorBehavior MaxLength="10"/>
                         </Entry.Behaviors>
                     </Entry>
+                    <ActivityIndicator Grid.Row="3" VerticalOptions="End" HorizontalOptions="Center" x:Name="indicator" IsRunning="False" 
+                                   IsEnabled="True" IsVisible="False" Color="ForestGreen" BackgroundColor="Transparent"/>
                     <Label Grid.Row="4" Text="Mot de passe : " XAlign="Center"  />
                     <Entry x:Name="password"  Grid.Row="5" Text="{Binding Password}"  IsPassword="True" >
                         <Entry.Behaviors>
@@ -67,7 +69,7 @@
                     </Picker.Items>
                 </Picker>
 
-                <Button Grid.Row="12"  Text="Enregistrer" Clicked="Button_Clicked"/>
+                <Button x:Name="myButton" Grid.Row="12"  Text="Enregistrer" Clicked="Button_Clicked"/>
             </Grid>
             </ScrollView>
         </StackLayout>

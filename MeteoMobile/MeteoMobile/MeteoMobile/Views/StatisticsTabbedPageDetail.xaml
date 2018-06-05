@@ -18,7 +18,10 @@
             <ScrollView>
                 <StackLayout>
                     <DatePicker x:Name="picker" MinimumDate="05/30/2018" DateSelected="DatePicker_DateSelected" IsVisible="False"/>
-                    <forms:ChartView x:Name="tempratureChart"  HeightRequest="400" />
+                    <ActivityIndicator HeightRequest="400" VerticalOptions="Center" HorizontalOptions="Center" x:Name="indicator" IsRunning="False" 
+                                   IsEnabled="True" IsVisible="False" Color="ForestGreen" BackgroundColor="Transparent"/>
+                     <forms:ChartView x:Name="tempratureChart"  HeightRequest="400" />
+                    
                 </StackLayout>
             </ScrollView>
 

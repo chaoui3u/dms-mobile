@@ -39,24 +39,52 @@ namespace MeteoMobile.Views
             {
                 var vm = (SignUpViewModel)this.BindingContext;
                 vm.SignUpCommand.Execute(null);
-                await PutTaskDelay(5000);
-                DisplayConfirmAlert(vm.IsSuccess);
-                await App.Current.MainPage.Navigation.PopModalAsync();
-            }else
+                firstName.IsEnabled = false;
+                lastName.IsEnabled = false;
+                password.IsEnabled = false;
+                confirmPassword.IsEnabled = false;
+                email.IsEnabled = false;
+                rolePicker.IsEnabled = false;
+                myButton.IsEnabled = false;
+                indicator.IsRunning = true;
+                indicator.IsVisible = true;
+                await PutTaskDelay(6000);
+                var success = DisplayConfirmAlert(vm.IsSuccess);
+                if (success)
+                {
+                    await App.Current.MainPage.Navigation.PopModalAsync();
+                }
+            }
+            else
             {
                await DisplayAlert("Erreur", "Corrigez les entrer en rouge," +
                    " et ne laissez aucun champ vide.", "Ok");
+                
             }
 
         }
 
-        public void DisplayConfirmAlert(bool result)
+        public bool DisplayConfirmAlert(bool result)
         {
             if (result)
             {
                 DisplayAlert("Succès", "Votre utilisateur a était enregistré avec succès", "Ok");
+                return true;
             }
-            else DisplayAlert("Echec", "Votre utilisateur n'a pas était enregistré", "Ok");
+            else
+            {
+                DisplayAlert("Echec", "Votre utilisateur n'a pas était enregistré", "Ok");
+                firstName.IsEnabled = true;
+                lastName.IsEnabled = true;
+                password.IsEnabled = true;
+                confirmPassword.IsEnabled = true;
+                email.IsEnabled = true;
+                rolePicker.IsEnabled = true;
+                myButton.IsEnabled = true;
+                indicator.IsRunning = false;
+                indicator.IsVisible = false;
+                return false;
+            }
         }
         async Task PutTaskDelay(int delay)
         {
