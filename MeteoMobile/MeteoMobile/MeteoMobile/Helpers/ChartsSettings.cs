@@ -29,7 +29,7 @@ namespace MeteoMobile.Helpers
                 {
                     entries.Add(new Entry(Pressure / 18)
                     {
-                        Color = SKColor.Parse("#00CED1"),
+                        Color = SKColor.Parse("#006400"),
                         Label = _weatherRecords[i].CurrentTime.Hour.ToString("00.##") + "H",
                         ValueLabel = _weatherRecords[i].MainData.Pressure + " hpa"
                     });
@@ -50,7 +50,7 @@ namespace MeteoMobile.Helpers
                 {
                     entries.Add(new Entry(WindSpeed/18)
                     {
-                        Color = SKColor.Parse("#800000"),
+                        Color = SKColor.Parse("#FFA500"),
                         Label = _weatherRecords[i].CurrentTime.Hour.ToString("00.##") + "H",
                         ValueLabel = _weatherRecords[i].Wind.Speed + " m/s"
                     });
@@ -71,7 +71,7 @@ namespace MeteoMobile.Helpers
                 {
                     entries.Add(new Entry(Temprature/18)
                     {
-                        Color = SKColor.Parse("#00BFFF"),
+                        Color = SKColor.Parse("#FF0000"),
                         Label = _weatherRecords[i].CurrentTime.Hour.ToString("00.##") + "H",
                         ValueLabel = _weatherRecords[i].MainData.Temp + " °C"
                     });
@@ -113,7 +113,7 @@ namespace MeteoMobile.Helpers
                 {
                     entries.Add(new Entry(Humidity/18)
                     {
-                        Color = SKColor.Parse("#B22222"),
+                        Color = SKColor.Parse("000080"),
                         Label = _weatherRecords[i].CurrentTime.Hour.ToString("00.##") + "H",//+ _weatherRecords[i].CurrentTime.Minute.ToString(),
                         ValueLabel = _weatherRecords[i].MainData.Humidity + " %"
                     });

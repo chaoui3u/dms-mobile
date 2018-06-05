@@ -95,12 +95,17 @@ namespace MeteoMobile.Views
         {
             var wd = e.Item as WeatherRecordModel;
             DisplayAlert("Details de la capture",
-                "Date et heure :"+wd.CurrentTime.DateTime
-                +"\nTempérature :"+ wd.MainData.Temp +" °C"
-                +"\nHumidité :"+wd.MainData.Humidity + " %"
-                +"\nPréssion :"+wd.MainData.Pressure+ " Hpa"
-                +"\nVitesse du vent :"+wd.Wind.Speed+ " °"
-                +"\nDirection du vent :"+wd.Wind.Degree+ " m/s","Ok");
+                "Date\t\t: "+wd.CurrentTime.Date.Day.ToString("00.##")
+                +"/"+ wd.CurrentTime.Date.Month.ToString("00.##")
+                +"/"+ wd.CurrentTime.Date.Year.ToString("00.##")
+                + "\nHeure\t\t: "+wd.CurrentTime.DateTime.Hour.ToString("00.##")
+                +":"+ wd.CurrentTime.DateTime.Minute.ToString("00.##")
+                +":"+ wd.CurrentTime.DateTime.Second.ToString("00.##")
+                + "\nTempérature\t\t: "+ wd.MainData.Temp +" °C"
+                +"\nHumidité\t\t: "+wd.MainData.Humidity + " %"
+                +"\nPréssion\t\t: "+wd.MainData.Pressure+ " Hpa"
+                +"\nVitesse du vent\t : "+wd.Wind.Speed+ " °"
+                +"\nDirection du vent\t : "+wd.Wind.Degree+ " m/s","Ok");
         }
     }
 }
