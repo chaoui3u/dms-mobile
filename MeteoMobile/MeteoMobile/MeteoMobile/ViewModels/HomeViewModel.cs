@@ -135,7 +135,7 @@ namespace MeteoMobile.ViewModels
                             WindDegree = WeatherRecord[0].Wind.Degree;
                             CurrentTime = WeatherRecord[0].CurrentTime;
                             TempCelcius = string.Format("{0} °C", Temperature);
-                            PressurePascal = string.Format("{0} hpa", Pressure);
+                            PressurePascal = string.Format("{0} Hpa", Pressure);
                             HumidityPercent = string.Format("{0} %", Humidity);
                             WindSpeedMeterPerSec = string.Format("{0} m/s", WindSpeed);
                             WindDirectionDegree = string.Format("{0} °", WindDegree);

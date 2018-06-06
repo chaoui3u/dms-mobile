@@ -20,13 +20,25 @@ namespace MeteoMobile.Views
 
             
 		}
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
             vm = (ProfileViewModel)this.BindingContext;
             vm.GetCurrentUserCommand.Execute(null);
             //await PutTaskDelay(400);
-            nameLabel.Text = vm.FirstName + " " + vm.LastName;
+            nameLabel.Text = UppercaseFirst(vm.FirstName) + " \n" + UppercaseFirst(vm.LastName);
+        }
+
+           string UppercaseFirst(string s)
+        {
+            if (string.IsNullOrEmpty(s))
+            {
+                return string.Empty;
+            }
+            char[] a = s.ToCharArray();
+            a[0] = char.ToUpper(a[0]);
+            return new string(a);
         }
 
         async Task PutTaskDelay(int delay)

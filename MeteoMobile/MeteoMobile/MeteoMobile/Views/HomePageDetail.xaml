@@ -32,26 +32,26 @@
                     <Label Grid.Column="0" Grid.Row="1"  Text="Bienvenue " Font="Bold" FontSize="Large" XAlign="Center"/>
                     <Label Grid.Column="1" Grid.Row="1" x:Name="nameLabel" Font="Bold" FontSize="Large" XAlign="Start"/>
 
-                    <Label Grid.Column="0" Grid.Row="3" Text="Température :" XAlign="Center"/>
-                    <Label Grid.Column="1" Grid.Row="3"  Text="{Binding TempCelcius}" />
+                    <Label Grid.Column="0" Grid.Row="3" Text="Température :" XAlign="Center" TextColor="Red"/>
+                    <Label Grid.Column="1" Grid.Row="3"  Text="{Binding TempCelcius}"  TextColor="Red"/>
 
-                    <Label Grid.Column="0" Grid.Row="4" Text="Humidité :" XAlign="Center"/>
-                    <Label Grid.Column="1" Grid.Row="4"  Text="{Binding HumidityPercent}" />
+                    <Label Grid.Column="0" Grid.Row="4" Text="Humidité :" XAlign="Center" TextColor="DarkBlue"/>
+                    <Label Grid.Column="1" Grid.Row="4"  Text="{Binding HumidityPercent}" TextColor="DarkBlue"/>
 
-                    <Label  Grid.Column="0" Grid.Row="5" Text="Préssion :" XAlign="Center"/>
-                    <Label  Grid.Column="1" Grid.Row="5"  Text="{Binding PressurePascal}" />
+                    <Label  Grid.Column="0" Grid.Row="5" Text="Préssion :" XAlign="Center" TextColor="DarkGreen"/>
+                    <Label  Grid.Column="1" Grid.Row="5"  Text="{Binding PressurePascal}"  TextColor="DarkGreen"/>
 
-                    <Label  Grid.Column="0" Grid.Row="6" Text="Vitesse du vent :" XAlign="Center"/>
-                    <Label  Grid.Column="1" Grid.Row="6"  Text="{Binding WindSpeedMeterPerSec}"/>
+                    <Label  Grid.Column="0" Grid.Row="6" Text="Vitesse du vent :" XAlign="Center" TextColor="Orange"/>
+                    <Label  Grid.Column="1" Grid.Row="6"  Text="{Binding WindSpeedMeterPerSec}" TextColor="Orange"/>
 
-                    <Label  Grid.Column="0" Grid.Row="7" Text="Direction du vent :" XAlign="Center"/>
-                    <Label  Grid.Column="1" Grid.Row="7"  Text="{Binding WindDirectionDegree}" />
+                    <Label  Grid.Column="0" Grid.Row="7" Text="Direction du vent :" XAlign="Center" TextColor="Brown"/>
+                    <Label  Grid.Column="1" Grid.Row="7"  Text="{Binding WindDirectionDegree}"  TextColor="Brown"/>
 
-                    <Label  Grid.Column="0" Grid.Row="8" Text="Date de capture :" XAlign="Center"/>
-                    <Label  Grid.Column="1" Grid.Row="8"  Text="{Binding DateOfDay}" />
+                    <Label  Grid.Column="0" Grid.Row="8" Text="Date de mesure :" XAlign="Center" TextColor="Black"/>
+                    <Label  Grid.Column="1" Grid.Row="8"  Text="{Binding DateOfDay}" TextColor="Black"/>
 
-                    <Label  Grid.Column="0" Grid.Row="9" Text="Temp de capture:" XAlign="Center"/>
-                    <Label  Grid.Column="1" Grid.Row="9"  Text="{Binding TimeOfDay}" />
+                    <Label  Grid.Column="0" Grid.Row="9" Text="Temps de mesure:" XAlign="Center" TextColor="Black"/>
+                    <Label  Grid.Column="1" Grid.Row="9"  Text="{Binding TimeOfDay}" TextColor="Black"/>
                 </Grid>
             </ScrollView>
         </StackLayout>

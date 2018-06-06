@@ -104,8 +104,8 @@ namespace MeteoMobile.Views
                 + "\nTempérature\t\t: "+ wd.MainData.Temp +" °C"
                 +"\nHumidité\t\t: "+wd.MainData.Humidity + " %"
                 +"\nPréssion\t\t: "+wd.MainData.Pressure+ " Hpa"
-                +"\nVitesse du vent\t : "+wd.Wind.Speed+ " °"
-                +"\nDirection du vent\t : "+wd.Wind.Degree+ " m/s","Ok");
+                +"\nDirection du vent\t : "+wd.Wind.Speed+ " °"
+                +"\nVitesse du vent\t : "+wd.Wind.Degree+ " m/s","Ok");
         }
     }
 }

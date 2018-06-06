@@ -22,19 +22,19 @@
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
-                    <Label Grid.Column="0" Grid.Row="1" Text="Utilisateur :" XAlign="Center" FontSize="Medium"/>
-                    <Label Grid.Column="1" Grid.Row="1" x:Name="nameLabel"  FontSize="Medium" />
+                    <Label Grid.Column="0" Grid.Row="1" Text="Utilisateur :" XAlign="Center" FontSize="Medium" TextColor="Black"/>
+                    <Label Grid.Column="1" Grid.Row="1" x:Name="nameLabel"  FontSize="Medium" TextColor="Black" XAlign="Start"/>
 
-                    <Label Grid.Column="0" Grid.Row="2" Text="Votre Email :" XAlign="Center" FontSize="Small"/>
-                    <Label Grid.Column="1" Grid.Row="2" x:Name="emailLabel" Text="{Binding Email}" FontSize="Small"/>
+                    <Label Grid.Column="0" Grid.Row="2" Text="Votre Email :" XAlign="Center" FontSize="Small" TextColor="Black"/>
+                    <Label Grid.Column="1" Grid.Row="2" x:Name="emailLabel"  XAlign="Start" Text="{Binding Email}" FontSize="Small" TextColor="Black"/>
 
-                    <Label  Grid.Column="0" Grid.Row="3" Text="Date de la création du compte :" XAlign="Center" FontSize="Small"/>
-                    <Label  Grid.Column="1" Grid.Row="3" x:Name="dateCreationLabel" Text="{Binding CreatedAt.DateTime}"  FontSize="Small"/>
+                    <Label  Grid.Column="0" Grid.Row="3" Text="Date de la création du compte :" XAlign="Center" FontSize="Small" TextColor="Black"/>
+                    <Label  Grid.Column="1" Grid.Row="3" x:Name="dateCreationLabel"  XAlign="Start" Text="{Binding CreatedAt.DateTime}"  FontSize="Small" TextColor="Black"/>
 
-                    <Label  Grid.Column="0" Grid.Row="4" Text="vous êtes connécté en tant que :" XAlign="Center" FontSize="Small"/>
-                    <Label  Grid.Column="1" Grid.Row="4" x:Name="roleLabel" Text="{Binding Role}"  FontSize="Small"/>
+                    <Label  Grid.Column="0" Grid.Row="4" Text="vous êtes connécté en tant que :" XAlign="Center" FontSize="Small" TextColor="Black"/>
+                    <Label  Grid.Column="1" Grid.Row="4" x:Name="roleLabel"  XAlign="Start" Text="{Binding Role}"  FontSize="Small" TextColor="Black"/>
 
-                    <Button  Grid.Column="1" Grid.Row="6" Text="Modfier" Clicked="Button_Clicked"/>
+                    <Button  Grid.Column="1" Grid.Row="6" Text="Modfier"  Clicked="Button_Clicked"/>
                 </Grid>
             </ScrollView>
         </StackLayout>

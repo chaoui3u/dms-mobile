@@ -30,13 +30,13 @@
                     <Label  Grid.Row="0"  Text="Nom : " XAlign="Center"  />
                     <Entry  x:Name="firstName"  Grid.Row="1" Text="{Binding FirstName}" >
                         <Entry.Behaviors>
-                            <Behaviors:MaxLengthValidatorBehavior MaxLength="10"/>
+                            <Behaviors:MaxLengthValidatorBehavior MaxLength="8"/>
                         </Entry.Behaviors>
                     </Entry>
                     <Label   Grid.Row="2" Text="Prénom : " XAlign="Center"  />
                     <Entry  x:Name="lastName" Grid.Row="3" Text="{Binding LastName}" >
                         <Entry.Behaviors>
-                            <Behaviors:MaxLengthValidatorBehavior MaxLength="10"/>
+                            <Behaviors:MaxLengthValidatorBehavior MaxLength="8"/>
                         </Entry.Behaviors>
                     </Entry>
                     <ActivityIndicator Grid.Row="3" VerticalOptions="End" HorizontalOptions="Center" x:Name="indicator" IsRunning="False" 

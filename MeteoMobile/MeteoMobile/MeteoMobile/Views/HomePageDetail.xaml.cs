@@ -17,7 +17,18 @@ namespace MeteoMobile.Views
         public HomePageDetail()
         {
             InitializeComponent();
-            nameLabel.Text = Constants.MyUser.FirstName + " " + Constants.MyUser.LastName;
+            nameLabel.Text = UppercaseFirst(Constants.MyUser.FirstName) + " " + UppercaseFirst(Constants.MyUser.LastName);
+        }
+
+        string UppercaseFirst(string s)
+        {
+            if (string.IsNullOrEmpty(s))
+            {
+                return string.Empty;
+            }
+            char[] a = s.ToCharArray();
+            a[0] = char.ToUpper(a[0]);
+            return new string(a);
         }
         protected async override void OnAppearing()
         {
