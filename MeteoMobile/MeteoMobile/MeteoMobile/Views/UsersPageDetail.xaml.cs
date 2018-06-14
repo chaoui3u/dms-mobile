@@ -59,7 +59,7 @@ namespace MeteoMobile.Views
        
         private async void Delete_Clicked(object sender, EventArgs e)
         {
-            var answer = await DisplayAlert("Question?", "Voulez vous vraiment supprimer cette utilisateur ?", "Oui", "Non");
+            var answer = await DisplayAlert("Confirmation", "Voulez vous vraiment supprimer cette utilisateur ?", "Oui", "Non");
             if (answer)
             {
                 Constants.ThisUser = ((MenuItem)sender).CommandParameter as UserModel;

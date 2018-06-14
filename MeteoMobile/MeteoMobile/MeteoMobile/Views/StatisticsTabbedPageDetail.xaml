@@ -28,7 +28,7 @@
         </ContentPage.Content>
     </ContentPage>
 
-    <ContentPage Title="Vent" >
+    <ContentPage Title="Vitesse du Vent" >
         <ContentPage.Content>
             <ScrollView>
                 <StackLayout>
