@@ -43,7 +43,7 @@ namespace MeteoMobile.Views
                     await PutTaskDelay(2000);
                 try
                 {
-                    await Navigation.PushModalAsync(new HomePage());
+                    App.Current.MainPage = new HomePage();
                 }
                 catch (Exception ex)
                 {

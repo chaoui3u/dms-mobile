@@ -53,7 +53,7 @@ namespace MeteoMobile.Views
 
             vm.DateTimeChosen = e.NewDate;
             vm.GetWeatherRecordsCommand.Execute(null);
-             await PutTaskDelay(2000);
+             await PutTaskDelay(3000);
             var weatherRecords = vm.WeatherRecords;
             if (!vm.IsSuccess || weatherRecords.Count() < 18)
             {

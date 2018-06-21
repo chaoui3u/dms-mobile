@@ -123,7 +123,8 @@ namespace MeteoMobile.ViewModels
             {
                 return new Command(async () => 
                 {
-                    WeatherRecord = await _apiServices.GetActualWeatherRecord(Settings.AccessToken, DateTimeOffset.Now);
+                    //test for summer time
+                    WeatherRecord = await _apiServices.GetActualWeatherRecord(Settings.AccessToken, DateTimeOffset.Now.ToOffset(TimeSpan.FromHours(2)));
                     if (WeatherRecord != null && WeatherRecord.Count >= 1)
                     {
                         try

@@ -250,9 +250,11 @@ namespace MeteoMobile.Services
 
             var month = (int.Parse(dateTime.AddDays(1).Day.ToString()) == 1) ? dateTime.AddMonths(1).Month : dateTime.Month;
             var year = (int.Parse(dateTime.AddMonths(1).Month.ToString()) == 1 && int.Parse(dateTime.AddDays(1).Day.ToString()) == 1) ? dateTime.AddYears(1).Year : dateTime.Year;
+            //test for summer time
+            var time = (dateTime.Month >= 6 && dateTime.Day >= 17) ? "T01:10:00" : "T00:10:00";
 
-            var url = Constants.GetWeatherRecordsUrl + dateTime.Year+"-"+dateTime.Month+"-"+dateTime.Day+"T00:10:00" 
-                + "/" + year + "-" + month  + "-" + dateTime.AddDays(1).Day + "T00:00:00";
+            var url = Constants.GetWeatherRecordsUrl + dateTime.Year+"-"+dateTime.Month+"-"+dateTime.Day+time
+                + "/" + year + "-" + month  + "-" + dateTime.AddDays(1).Day + time;
             List<WeatherRecordModel> weatherRecords;
             try
             {
@@ -282,6 +284,7 @@ namespace MeteoMobile.Services
                 new AuthenticationHeaderValue("Bearer", accessToken);
             //validating certificate to use https
             ServicePointManager.ServerCertificateValidationCallback = CertificateValidation.MyRemoteCertificateValidationCallback;
+            
             var month = (int.Parse(currentDate.Day.ToString()) == 1 
                 && int.Parse(currentDate.Minute.ToString()) >= 0 
                 && int.Parse(currentDate.Minute.ToString()) < 20

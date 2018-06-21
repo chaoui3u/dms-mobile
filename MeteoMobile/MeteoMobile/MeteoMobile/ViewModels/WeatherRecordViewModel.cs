@@ -20,7 +20,9 @@ namespace MeteoMobile.ViewModels
         
         public DateTimeOffset DateTimeChosen
         {
-            get { return _dateTime;  }
+            get {
+                return _dateTime;
+            }
             set { _dateTime = value; OnPropertyChanged(nameof(DateTimeChosen)); }
         }
 
